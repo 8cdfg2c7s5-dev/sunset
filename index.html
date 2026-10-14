@@ -21,8 +21,8 @@ li{display:flex;justify-content:space-between;border-bottom:1px solid #ffffff22;
 @media (prefers-reduced-motion:reduce){body.loading{animation:none}body{transition:none}}
 </style></head><body class="loading">
 <div class="tabs"><button id="t-rise" onclick="show('rise')">זריחה</button><button id="t-set" onclick="show('set')">שקיעה</button></div>
-<div id="day"></div><div class="score" id="score"></div><div class="msg" id="msg">מאתר מיקום…</div><div class="time" id="time"></div>
-<div style="font-size:18px;font-weight:700;margin-top:10px">למה?</div><ul id="why"></ul><div id="rate" style="display:none"><div id="rq" style="font-size:18px;font-weight:700"></div><div id="rb"></div><div id="rmsg"></div><button onclick="exportLog()" style="margin-top:6px;border-radius:12px;border:0;padding:4px 10px">ייצוא דיווחים</button></div><button id="loc" onclick="locate()">📍 השתמש במיקום שלי</button>
+<div id="day"></div><div class="score" id="score"></div><div class="msg" id="msg">מאתר מיקום…</div><div class="time" id="time"></div><button id="place" onclick="togglePick()" style="margin-top:6px;font-size:15px;padding:6px 14px;border-radius:999px;border:1px solid #ffffff44;background:#ffffff26;color:#fff;backdrop-filter:blur(20px)"></button><div id="note" style="font-size:14px;opacity:.8;margin-top:4px"></div><div id="pick" style="display:none;flex-direction:column;align-items:center"><form id="cityf" onsubmit="city(event)" style="display:flex;gap:6px;margin-top:14px"><input id="cityq" placeholder="חיפוש עיר" style="font-size:16px;padding:10px 14px;border-radius:999px;border:0;width:170px"><button style="font-size:16px;padding:10px 16px;border-radius:999px;border:0;font-weight:600">חפש</button></form><button id="loc" onclick="togglePick();locate()">📍 השתמש במיקום שלי</button></div>
+<div style="font-size:18px;font-weight:700;margin-top:10px">למה?</div><ul id="why"></ul><div id="rate" style="display:none"><div id="rq" style="font-size:18px;font-weight:700"></div><div id="rb"></div><div id="rmsg"></div><button onclick="exportLog()" style="margin-top:6px;border-radius:12px;border:0;padding:4px 10px">ייצוא דיווחים</button></div>
 <script>
 const $=id=>document.getElementById(id);let D=null,cur=new Date().getHours()>=12?'set':'rise';
 const F='https://api.open-meteo.com/v1/forecast',A='https://air-quality-api.open-meteo.com/v1/air-quality';
@@ -46,10 +46,16 @@ let LAST=null;
 $('rb').innerHTML=[...Array(10)].map((_,i)=>`<button onclick="rate(${i+1})">${i+1}</button>`).join('');
 function rate(n){if(!LAST)return;const log=JSON.parse(localStorage.sunsetLog||'[]');log.push({...LAST,observed:n,reported:new Date().toISOString()});localStorage.sunsetLog=JSON.stringify(log);$('rmsg').textContent=`נשמר: ${n}/10, תודה!`}
 function exportLog(){const b=new Blob([localStorage.sunsetLog||'[]'],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='sunset-log.json';a.click()}
-async function load(lat,lon){const q=`&hourly=cloud_cover_low,cloud_cover_mid,cloud_cover_high,relative_humidity_2m&daily=sunrise,sunset&timezone=auto&forecast_days=2`;
+let PLACE='';async function load(lat,lon,name){PLACE=name||'';const q=`&hourly=cloud_cover_low,cloud_cover_mid,cloud_cover_high,relative_humidity_2m&daily=sunrise,sunset&timezone=auto&forecast_days=2`;
 const dl=75/(111*Math.cos(lat*Math.PI/180));
 const [f,w,e,aq]=await Promise.all([j(`${F}?latitude=${lat}&longitude=${lon}${q}`),j(`${F}?latitude=${lat}&longitude=${lon-dl}${q}`),j(`${F}?latitude=${lat}&longitude=${lon+dl}${q}`),j(`${A}?latitude=${lat}&longitude=${lon}&hourly=aerosol_optical_depth&timezone=auto&forecast_days=2`)]);
-D={set:{f,far:w},rise:{f,far:e},aq};show(cur)}
-function locate(){$('msg').textContent='מאתר מיקום…';document.body.classList.add('loading');const tlv=()=>load(32.08,34.78);navigator.geolocation?navigator.geolocation.getCurrentPosition(p=>load(p.coords.latitude,p.coords.longitude),tlv,{timeout:8000}):tlv()}
+D={set:{f,far:w},rise:{f,far:e},aq};$('place').textContent='📍 '+(PLACE||'המיקום שלך')+' ▾';show(cur)}
+function locate(){$('msg').textContent='מאתר מיקום…';document.body.classList.add('loading');
+const tlv=(why)=>{load(32.08,34.78,'תל אביב');$('note').textContent='לא הצלחנו לאתר אותך, מציגים את תל אביב'};
+if(!navigator.geolocation||!window.isSecureContext)return tlv('הדפדפן לא תומך במיקום');
+navigator.geolocation.getCurrentPosition(p=>{$('note').textContent='';load(p.coords.latitude,p.coords.longitude,'')},e=>tlv(e.code==1?'הרשאת המיקום נחסמה':'לא הצלחנו לאתר מיקום'),{timeout:10000,maximumAge:600000})}
+function togglePick(v){const e=$('pick');e.style.display=(v===undefined?e.style.display=='none':v)?'flex':'none'}
+async function city(ev){ev.preventDefault();const q=$('cityq').value.trim();if(!q)return;const r=await j(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&language=he&count=1`);
+if(!r.results){$('note').textContent='לא מצאנו עיר בשם הזה, נסו שם אחר';return}const c=r.results[0];$('note').textContent='';togglePick(false);document.body.classList.add('loading');load(c.latitude,c.longitude,c.name)}
 show(cur);locate();
 </script></body></html>
