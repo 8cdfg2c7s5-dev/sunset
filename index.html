@@ -1,0 +1,44 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>תחזית שקיעה</title><style>
+body{margin:0;font-family:system-ui,sans-serif;color:#fff;text-shadow:0 1px 3px #0006;min-height:100vh;display:flex;flex-direction:column;align-items:center;transition:background 1s;background:linear-gradient(#5B6B7F,#9AA5B1)}
+.tabs{display:flex;gap:8px;margin:20px}.tabs button{font-size:18px;padding:8px 18px;border-radius:20px;border:0;background:#fff3;color:#fff}.tabs .on{background:#fff;color:#333;text-shadow:none}
+.score{font-size:96px;font-weight:800;margin:10px 0 0}.msg{font-size:24px;text-align:center}.time{opacity:.9;margin:8px}
+ul{list-style:none;padding:0;font-size:18px}li{margin:8px}#loc{margin:20px;font-size:18px;padding:10px 20px;border-radius:20px;border:0}
+.score small{font-size:36px;opacity:.8}#day{font-size:18px;opacity:.9;min-height:22px}
+body.loading{background:linear-gradient(270deg,#5B6B7F,#F2A65A,#B05BA8,#5B6B7F)!important;background-size:600% 600%!important;animation:sh 6s ease infinite}
+@keyframes sh{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+#rate{margin:10px;text-align:center}#rb{display:grid;grid-template-columns:repeat(5,48px);gap:8px;justify-content:center;margin:8px}#rate #rb button{font-size:18px;width:48px;height:48px;margin:0;margin:2px;border-radius:50%;border:0}
+</style></head><body class="loading">
+<div class="tabs"><button id="t-rise" onclick="show('rise')">זריחה</button><button id="t-set" onclick="show('set')">שקיעה</button></div>
+<div id="day"></div><div class="score" id="score"></div><div class="msg" id="msg">מאתר מיקום…</div><div class="time" id="time"></div>
+<div style="font-size:18px;font-weight:700;margin-top:10px">למה?</div><ul id="why"></ul><div id="rate" style="display:none"><div id="rq" style="font-size:18px;font-weight:700"></div><div id="rb"></div><div id="rmsg"></div><button onclick="exportLog()" style="margin-top:6px;border-radius:12px;border:0;padding:4px 10px">ייצוא דיווחים</button></div><button id="loc" onclick="locate()">📍 השתמש במיקום שלי</button>
+<script>
+const $=id=>document.getElementById(id);let D=null,cur=new Date().getHours()>=12?'set':'rise';
+const F='https://api.open-meteo.com/v1/forecast',A='https://air-quality-api.open-meteo.com/v1/air-quality';
+const j=u=>fetch(u).then(r=>r.json());
+const mark=s=>s=='g'?'🟢 טוב':s=='m'?'🟡 בינוני':'🔴 חלש';
+function at(H,key,t){const i=H.time.findIndex(x=>new Date(x)>t);if(i<1)return H[key][0];return 0.6*H[key][i-1]+0.4*H[key][i]}
+function calc(p,H,t){const high=at(H,'cloud_cover_high',t)+0.6*at(H,'cloud_cover_mid',t),canvas=Math.max(0,1-Math.abs(high-50)/50);
+const block=at(p.far.hourly,'cloud_cover_low',t)/100,humid=at(H,'relative_humidity_2m',t)>85?0.7:1;
+const aod=at(D.aq.hourly,'aerosol_optical_depth',t),haze=aod<=0.3?1:aod<=0.6?0.85:0.6;
+const s=Math.round(1+9*canvas*(1-0.8*block)*humid*haze);
+return{s,canvas,block,humid,haze,aod}}
+function show(k){cur=k;$('t-rise').className=k=='rise'?'on':'';$('t-set').className=k=='set'?'on':'';if(!D)return;
+const p=D[k],ev=p.f.daily[k=='set'?'sunset':'sunrise'],day=new Date(ev[0])<new Date()?1:0,t=new Date(ev[day]),H=p.f.hourly;$('day').textContent=day?'מחר':'היום';
+const {s,canvas,block,humid,haze,aod}=calc(p,H,t);
+const L=s<=3?['כנראה שקיעה אפורה','#5B6B7F,#9AA5B1']:s<=6?['יכולה להיות נחמדה','#F2A65A,#7A8FB0']:s<=8?['שווה לצאת!','#FF7E5F,#B05BA8']:['שקיעה מרהיבה צפויה!','#FF5E62,#FF9966,#6A3093'];
+document.body.classList.remove('loading');$('score').innerHTML=s+'<small>/10</small>';if(day){const t0=new Date(ev[0]),r=calc(p,H,t0);LAST={date:t0.toISOString(),type:k,predicted:r.s,canvas:+r.canvas.toFixed(3),block:+r.block.toFixed(3),humid:r.humid,haze:r.haze,aod:r.aod};}else LAST=null;
+$('rate').style.display=day?'block':'none';$('rq').textContent=k=='set'?'איך הייתה השקיעה היום?':'איך הייתה הזריחה היום?';$('msg').textContent=k=='rise'?L[0].replace('שקיעה','זריחה'):L[0];document.body.style.background=`linear-gradient(${L[1]})`;
+const m=Math.round((t-new Date())/6e4);$('time').textContent=`${k=='set'?'שקיעה':'זריחה'} ב-${t.toTimeString().slice(0,5)}`+(m>0?` · בעוד ${Math.floor(m/60)}:${String(m%60).padStart(2,'0')}`:'');
+$('why').innerHTML=[['☁️ עננים גבוהים שיתפסו צבע',canvas>0.6?'g':canvas>=0.3?'m':'b'],[`🌅 אופק פתוח ב${k=='set'?'מערב':'מזרח'}`,block<0.2?'g':block<=0.5?'m':'b'],['💧 לחות',humid==1?'g':'b'],['🌫️ אוויר צלול',haze==1?'g':haze==0.85?'m':'b']].map(([a,b])=>`<li>${a}: ${mark(b)}</li>`).join('')}
+let LAST=null;
+$('rb').innerHTML=[...Array(10)].map((_,i)=>`<button onclick="rate(${i+1})">${i+1}</button>`).join('');
+function rate(n){if(!LAST)return;const log=JSON.parse(localStorage.sunsetLog||'[]');log.push({...LAST,observed:n,reported:new Date().toISOString()});localStorage.sunsetLog=JSON.stringify(log);$('rmsg').textContent=`נשמר: ${n}/10, תודה!`}
+function exportLog(){const b=new Blob([localStorage.sunsetLog||'[]'],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='sunset-log.json';a.click()}
+async function load(lat,lon){const q=`&hourly=cloud_cover_low,cloud_cover_mid,cloud_cover_high,relative_humidity_2m&daily=sunrise,sunset&timezone=auto&forecast_days=2`;
+const dl=75/(111*Math.cos(lat*Math.PI/180));
+const [f,w,e,aq]=await Promise.all([j(`${F}?latitude=${lat}&longitude=${lon}${q}`),j(`${F}?latitude=${lat}&longitude=${lon-dl}${q}`),j(`${F}?latitude=${lat}&longitude=${lon+dl}${q}`),j(`${A}?latitude=${lat}&longitude=${lon}&hourly=aerosol_optical_depth&timezone=auto&forecast_days=2`)]);
+D={set:{f,far:w},rise:{f,far:e},aq};show(cur)}
+function locate(){$('msg').textContent='מאתר מיקום…';document.body.classList.add('loading');const tlv=()=>load(32.08,34.78);navigator.geolocation?navigator.geolocation.getCurrentPosition(p=>load(p.coords.latitude,p.coords.longitude),tlv,{timeout:8000}):tlv()}
+show(cur);locate();
+</script></body></html>
