@@ -1,6 +1,6 @@
 <!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>תחזית שקיעה</title><style>
-body{margin:0;font-family:system-ui,sans-serif;color:#fff;text-shadow:0 1px 3px #0006;min-height:100vh;display:flex;flex-direction:column;align-items:center;transition:background 1s;background:linear-gradient(#5B6B7F,#9AA5B1)}
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@200;400;600&display=swap" rel="stylesheet"><title>תחזית שקיעה</title><style>
+body{margin:0;font-family:-apple-system,'SF Hebrew','Heebo',sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;color:#fff;text-shadow:0 1px 3px #0006;min-height:100vh;display:flex;flex-direction:column;align-items:center;transition:background 1s;background:linear-gradient(#5B6B7F,#9AA5B1)}
 .tabs{display:flex;gap:8px;margin:20px}.tabs button{font-size:18px;padding:8px 18px;border-radius:20px;border:0;background:#fff3;color:#fff}.tabs .on{background:#fff;color:#333;text-shadow:none}
 .score{font-size:96px;font-weight:800;margin:10px 0 0}.msg{font-size:24px;text-align:center}.time{opacity:.9;margin:8px}
 ul{list-style:none;padding:0;font-size:18px}li{margin:8px}#loc{margin:20px;font-size:18px;padding:10px 20px;border-radius:20px;border:0}
@@ -8,6 +8,17 @@ ul{list-style:none;padding:0;font-size:18px}li{margin:8px}#loc{margin:20px;font-
 body.loading{background:linear-gradient(270deg,#5B6B7F,#F2A65A,#B05BA8,#5B6B7F)!important;background-size:600% 600%!important;animation:sh 6s ease infinite}
 @keyframes sh{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 #rate{margin:10px;text-align:center}#rb{display:grid;grid-template-columns:repeat(5,48px);gap:8px;justify-content:center;margin:8px}#rate #rb button{font-size:18px;width:48px;height:48px;margin:0;margin:2px;border-radius:50%;border:0}
+.tabs{background:#ffffff26;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:3px;border-radius:12px;gap:0}
+.tabs button{border-radius:9px!important;padding:7px 28px!important;font-weight:600;font-size:15px!important;background:transparent!important}
+.tabs .on{background:#fff!important;color:#1d1d1f!important;box-shadow:0 2px 8px #0002}
+.score{font-weight:200!important;font-size:120px!important;letter-spacing:-.04em;line-height:1}
+.msg{font-weight:600;font-size:26px!important;letter-spacing:-.02em}
+ul,#rate{background:#ffffff26;backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid #ffffff33;border-radius:20px;padding:14px 20px!important;width:min(340px,86vw);box-sizing:border-box}
+li{display:flex;justify-content:space-between;border-bottom:1px solid #ffffff22;padding:8px 0;margin:0!important;font-size:16px}li:last-child{border:0}
+#rate #rb button{background:#ffffffe6;color:#1d1d1f;font-weight:600;border-radius:14px!important}
+#loc{background:#fff!important;color:#1d1d1f;font-weight:600;border-radius:999px!important;box-shadow:0 4px 14px #0003}
+.time,li,#day{font-weight:400;opacity:.8}
+@media (prefers-reduced-motion:reduce){body.loading{animation:none}body{transition:none}}
 </style></head><body class="loading">
 <div class="tabs"><button id="t-rise" onclick="show('rise')">זריחה</button><button id="t-set" onclick="show('set')">שקיעה</button></div>
 <div id="day"></div><div class="score" id="score"></div><div class="msg" id="msg">מאתר מיקום…</div><div class="time" id="time"></div>
