@@ -3,72 +3,126 @@
   "author": "Tuwuh",
   "license": "CC BY-SA 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:The_Perfect_Sunset.jpg",
-  "title": "File:The Perfect Sunset.jpg"
+  "title": "File:The Perfect Sunset.jpg",
+  "h": "sea"
  },
  "clear-2.webp": {
-  "author": "P. Horálek/ESO",
-  "license": "CC BY 4.0",
-  "source": "https://commons.wikimedia.org/wiki/File:Curious_distortion_of_the_Sun_light_over_the_Pacific_Ocean_(sunset_3-cc).jpg",
-  "title": "File:Curious distortion of the Sun light over the Pacific Ocean (sunset 3-cc).jpg"
+  "author": "Revital Salomon",
+  "license": "CC BY-SA 4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Sunset_on_the_Sea_-_Tel_Aviv,_Israel.JPG",
+  "title": "File:Sunset on the Sea - Tel Aviv, Israel.JPG",
+  "h": "sea"
  },
  "thin_high-1.webp": {
   "author": "GerritR",
   "license": "CC BY-SA 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Schattenstrahlen_an_Cirrus_III.jpg",
-  "title": "File:Schattenstrahlen an Cirrus III.jpg"
+  "title": "File:Schattenstrahlen an Cirrus III.jpg",
+  "h": "land"
  },
  "thin_high-2.webp": {
   "author": "McKay Savage from London, UK",
   "license": "CC BY 2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Pink-tinged_sunset_(6443858869).jpg",
-  "title": "File:Pink-tinged sunset (6443858869).jpg"
+  "title": "File:Pink-tinged sunset (6443858869).jpg",
+  "h": "land"
  },
  "mid_spectacular-1.webp": {
   "author": "Charles Knowles from Meridian Idaho, USA",
   "license": "CC BY 2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Colorful_and_dramatic_sunset_over_the_Boise_train_depot_-_Flickr_-_Knowles_Gallery.jpg",
-  "title": "File:Colorful and dramatic sunset over the Boise train depot - Flickr - Knowles Gallery.jpg"
+  "title": "File:Colorful and dramatic sunset over the Boise train depot - Flickr - Knowles Gallery.jpg",
+  "h": "land"
  },
  "mid_spectacular-2.webp": {
   "author": "Abubakr Saeed from Muscat, Oman, Sudan",
   "license": "CC BY 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Dramatic_Sky_-_Flickr_-_Abubakr_Saeed.jpg",
-  "title": "File:Dramatic Sky - Flickr - Abubakr Saeed.jpg"
+  "title": "File:Dramatic Sky - Flickr - Abubakr Saeed.jpg",
+  "h": "sea"
  },
  "horizon_band-1.webp": {
   "author": "Chad Sparkes from Kissimmee,Florida, United States",
   "license": "CC BY 2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Rays_of_Sunset_(23591438603).jpg",
-  "title": "File:Rays of Sunset (23591438603).jpg"
+  "title": "File:Rays of Sunset (23591438603).jpg",
+  "h": "sea"
  },
  "horizon_band-2.webp": {
   "author": "PattayaPatrol",
   "license": "CC BY-SA 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:DFC_1560_A_lone_boat_drifts_on_a_shimmering_sea_as_a_dramatic_golden_sunset_lights_up_towering_storm_clouds_on_the_horizon.jpg",
-  "title": "File:DFC 1560 A lone boat drifts on a shimmering sea as a dramatic golden sunset lights up towering storm clouds on the horizon.jpg"
+  "title": "File:DFC 1560 A lone boat drifts on a shimmering sea as a dramatic golden sunset lights up towering storm clouds on the horizon.jpg",
+  "h": "sea"
  },
  "overcast-1.webp": {
   "author": "PattayaPatrol",
   "license": "CC BY-SA 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:DSC_6669_A_quiet_overcast_shoreline_at_dusk_with_gentle_waves_lapping_the_sand_under_a_dramatic_cloud-filled_sky.jpg",
-  "title": "File:DSC 6669 A quiet overcast shoreline at dusk with gentle waves lapping the sand under a dramatic cloud-filled sky.jpg"
+  "title": "File:DSC 6669 A quiet overcast shoreline at dusk with gentle waves lapping the sand under a dramatic cloud-filled sky.jpg",
+  "h": "sea"
  },
  "overcast-2.webp": {
   "author": "John Lodder from Chicago",
   "license": "CC BY 2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Dusk_-_Flickr_-_jlodder.jpg",
-  "title": "File:Dusk - Flickr - jlodder.jpg"
+  "title": "File:Dusk - Flickr - jlodder.jpg",
+  "h": "land"
  },
  "haze-1.webp": {
   "author": "MeRyan",
   "license": "CC BY 2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Hazy_Sunset_-_Canada.jpg",
-  "title": "File:Hazy Sunset - Canada.jpg"
+  "title": "File:Hazy Sunset - Canada.jpg",
+  "h": "land"
  },
  "haze-2.webp": {
   "author": "John Robert McPherson",
   "license": "CC BY-SA 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Dust_haze_and_sunset,_Marchant_Park_Aspley_DSCF0066.jpg",
-  "title": "File:Dust haze and sunset, Marchant Park Aspley DSCF0066.jpg"
+  "title": "File:Dust haze and sunset, Marchant Park Aspley DSCF0066.jpg",
+  "h": "land"
+ },
+ "clear-3.webp": {
+  "author": "Namikilisu",
+  "license": "CC0",
+  "source": "https://commons.wikimedia.org/wiki/File:Tel_Aviv-Yafo._Mediterranean_Sea.jpg",
+  "title": "File:Tel Aviv-Yafo. Mediterranean Sea.jpg",
+  "h": "sea"
+ },
+ "clear-4.webp": {
+  "author": "Borya",
+  "license": "CC BY-SA 2.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Tel_Aviv_sunset_(5286231503).jpg",
+  "title": "File:Tel Aviv sunset (5286231503).jpg",
+  "h": "sea"
+ },
+ "clear-5.webp": {
+  "author": "Dr. Avishai Teicher",
+  "license": "CC BY 2.5",
+  "source": "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_21894_Sunset_at_Tel_Aviv_beach.JPG",
+  "title": "File:PikiWiki Israel 21894 Sunset at Tel Aviv beach.JPG",
+  "h": "sea"
+ },
+ "clear-6.webp": {
+  "author": "Alexander.Schaefer",
+  "license": "CC BY-SA 3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Sunrise_in_Timna_2010.jpg",
+  "title": "File:Sunrise in Timna 2010.jpg",
+  "h": "land"
+ },
+ "clear-7.webp": {
+  "author": "Eduard Marmet",
+  "license": "CC BY-SA 2.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Sunrise_over_the_Ramon_Crater,_Negev_desert_(33671459324).jpg",
+  "title": "File:Sunrise over the Ramon Crater, Negev desert (33671459324).jpg",
+  "h": "land"
+ },
+ "horizon_band-3.webp": {
+  "author": "Peter Trimming",
+  "license": "CC BY-SA 2.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Stonehenge_Sunset_(4)_-_geograph.org.uk_-_1626243.jpg",
+  "title": "File:Stonehenge Sunset (4) - geograph.org.uk - 1626243.jpg",
+  "h": "land"
  }
 }
