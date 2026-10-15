@@ -4,125 +4,279 @@
   "license": "CC BY-SA 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:The_Perfect_Sunset.jpg",
   "title": "File:The Perfect Sunset.jpg",
-  "h": "sea"
+  "h": "sea",
+  "i": "strong"
  },
  "clear-2.webp": {
   "author": "Revital Salomon",
   "license": "CC BY-SA 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Sunset_on_the_Sea_-_Tel_Aviv,_Israel.JPG",
   "title": "File:Sunset on the Sea - Tel Aviv, Israel.JPG",
-  "h": "sea"
+  "h": "sea",
+  "i": "weak"
  },
  "thin_high-1.webp": {
   "author": "GerritR",
   "license": "CC BY-SA 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Schattenstrahlen_an_Cirrus_III.jpg",
   "title": "File:Schattenstrahlen an Cirrus III.jpg",
-  "h": "land"
+  "h": "land",
+  "i": "mid"
  },
  "thin_high-2.webp": {
   "author": "McKay Savage from London, UK",
   "license": "CC BY 2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Pink-tinged_sunset_(6443858869).jpg",
   "title": "File:Pink-tinged sunset (6443858869).jpg",
-  "h": "land"
+  "h": "land",
+  "i": "mid"
  },
  "mid_spectacular-1.webp": {
   "author": "Charles Knowles from Meridian Idaho, USA",
   "license": "CC BY 2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Colorful_and_dramatic_sunset_over_the_Boise_train_depot_-_Flickr_-_Knowles_Gallery.jpg",
   "title": "File:Colorful and dramatic sunset over the Boise train depot - Flickr - Knowles Gallery.jpg",
-  "h": "land"
+  "h": "land",
+  "i": "strong"
  },
  "mid_spectacular-2.webp": {
   "author": "Abubakr Saeed from Muscat, Oman, Sudan",
   "license": "CC BY 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Dramatic_Sky_-_Flickr_-_Abubakr_Saeed.jpg",
   "title": "File:Dramatic Sky - Flickr - Abubakr Saeed.jpg",
-  "h": "sea"
+  "h": "sea",
+  "i": "mid"
  },
  "horizon_band-1.webp": {
   "author": "Chad Sparkes from Kissimmee,Florida, United States",
   "license": "CC BY 2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Rays_of_Sunset_(23591438603).jpg",
   "title": "File:Rays of Sunset (23591438603).jpg",
-  "h": "sea"
+  "h": "sea",
+  "i": "mid"
  },
  "horizon_band-2.webp": {
   "author": "PattayaPatrol",
   "license": "CC BY-SA 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:DFC_1560_A_lone_boat_drifts_on_a_shimmering_sea_as_a_dramatic_golden_sunset_lights_up_towering_storm_clouds_on_the_horizon.jpg",
   "title": "File:DFC 1560 A lone boat drifts on a shimmering sea as a dramatic golden sunset lights up towering storm clouds on the horizon.jpg",
-  "h": "sea"
+  "h": "sea",
+  "i": "strong"
  },
  "overcast-1.webp": {
   "author": "PattayaPatrol",
   "license": "CC BY-SA 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:DSC_6669_A_quiet_overcast_shoreline_at_dusk_with_gentle_waves_lapping_the_sand_under_a_dramatic_cloud-filled_sky.jpg",
   "title": "File:DSC 6669 A quiet overcast shoreline at dusk with gentle waves lapping the sand under a dramatic cloud-filled sky.jpg",
-  "h": "sea"
+  "h": "sea",
+  "i": "weak"
  },
  "overcast-2.webp": {
-  "author": "John Lodder from Chicago",
-  "license": "CC BY 2.0",
-  "source": "https://commons.wikimedia.org/wiki/File:Dusk_-_Flickr_-_jlodder.jpg",
-  "title": "File:Dusk - Flickr - jlodder.jpg",
-  "h": "land"
+  "author": "ndecker",
+  "license": "CC BY 3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Cloudy_Sunset_over_Catskills_-_panoramio.jpg",
+  "title": "File:Cloudy Sunset over Catskills - panoramio.jpg",
+  "h": "land",
+  "i": "weak"
  },
  "haze-1.webp": {
   "author": "MeRyan",
   "license": "CC BY 2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Hazy_Sunset_-_Canada.jpg",
   "title": "File:Hazy Sunset - Canada.jpg",
-  "h": "land"
+  "h": "land",
+  "i": "strong"
  },
  "haze-2.webp": {
   "author": "John Robert McPherson",
   "license": "CC BY-SA 4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Dust_haze_and_sunset,_Marchant_Park_Aspley_DSCF0066.jpg",
   "title": "File:Dust haze and sunset, Marchant Park Aspley DSCF0066.jpg",
-  "h": "land"
+  "h": "land",
+  "i": "strong"
  },
  "clear-3.webp": {
   "author": "Namikilisu",
   "license": "CC0",
   "source": "https://commons.wikimedia.org/wiki/File:Tel_Aviv-Yafo._Mediterranean_Sea.jpg",
   "title": "File:Tel Aviv-Yafo. Mediterranean Sea.jpg",
-  "h": "sea"
+  "h": "sea",
+  "i": "strong"
  },
  "clear-4.webp": {
   "author": "Borya",
   "license": "CC BY-SA 2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Tel_Aviv_sunset_(5286231503).jpg",
   "title": "File:Tel Aviv sunset (5286231503).jpg",
-  "h": "sea"
+  "h": "sea",
+  "i": "weak"
  },
  "clear-5.webp": {
   "author": "Dr. Avishai Teicher",
   "license": "CC BY 2.5",
   "source": "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_21894_Sunset_at_Tel_Aviv_beach.JPG",
   "title": "File:PikiWiki Israel 21894 Sunset at Tel Aviv beach.JPG",
-  "h": "sea"
+  "h": "sea",
+  "i": "mid"
  },
  "clear-6.webp": {
   "author": "Alexander.Schaefer",
   "license": "CC BY-SA 3.0",
   "source": "https://commons.wikimedia.org/wiki/File:Sunrise_in_Timna_2010.jpg",
   "title": "File:Sunrise in Timna 2010.jpg",
-  "h": "land"
+  "h": "land",
+  "i": "mid"
  },
  "clear-7.webp": {
   "author": "Eduard Marmet",
   "license": "CC BY-SA 2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Sunrise_over_the_Ramon_Crater,_Negev_desert_(33671459324).jpg",
   "title": "File:Sunrise over the Ramon Crater, Negev desert (33671459324).jpg",
-  "h": "land"
+  "h": "land",
+  "i": "weak"
  },
  "horizon_band-3.webp": {
   "author": "Peter Trimming",
   "license": "CC BY-SA 2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Stonehenge_Sunset_(4)_-_geograph.org.uk_-_1626243.jpg",
   "title": "File:Stonehenge Sunset (4) - geograph.org.uk - 1626243.jpg",
-  "h": "land"
+  "h": "land",
+  "i": "mid"
+ },
+ "horizon_band-4.webp": {
+  "author": "Dietmar Rabich",
+  "license": "CC BY-SA 4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Norderney,_Weststrand_--_2016_--_5285.jpg",
+  "title": "File:Norderney, Weststrand -- 2016 -- 5285.jpg",
+  "h": "sea",
+  "i": "weak"
+ },
+ "horizon_band-5.webp": {
+  "author": "Joshua Tree National Park",
+  "license": "PD",
+  "source": "https://commons.wikimedia.org/wiki/File:Smoke_from_Apple_Fire_at_sunset_at_Eureka_Peak_(51183274846).jpg",
+  "title": "File:Smoke from Apple Fire at sunset at Eureka Peak (51183274846).jpg",
+  "h": "land",
+  "i": "weak"
+ },
+ "thin_high-3.webp": {
+  "author": "Sandralu80",
+  "license": "CC BY-SA 4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Sunset_on_Palics_lake.jpg",
+  "title": "File:Sunset on Palics lake.jpg",
+  "h": "sea",
+  "i": "weak"
+ },
+ "thin_high-4.webp": {
+  "author": "John Robert McPherson",
+  "license": "CC BY-SA 4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Cirrus_at_sunset_7th_Brigade_Park_Chermside_P1010369.jpg",
+  "title": "File:Cirrus at sunset 7th Brigade Park Chermside P1010369.jpg",
+  "h": "land",
+  "i": "weak"
+ },
+ "thin_high-5.webp": {
+  "h": "sea_ridge",
+  "i": "weak",
+  "author": "שלמה רודד",
+  "license": "CC BY 2.5",
+  "source": "https://commons.wikimedia.org/wiki/File:127180_ein_bokek_-_sunrise_in_front_of_the_moab_mountains_PikiWiki_Israel.jpg",
+  "title": "File:127180 ein bokek - sunrise in front of the moab mountains PikiWiki Israel.jpg"
+ },
+ "thin_high-6.webp": {
+  "h": "sea_ridge",
+  "i": "mid",
+  "author": "שלמה רודד",
+  "license": "CC BY 2.5",
+  "source": "https://commons.wikimedia.org/wiki/File:127184_ein_bokek_-_sunrise_in_front_of_the_moab_mountains_PikiWiki_Israel.jpg",
+  "title": "File:127184 ein bokek - sunrise in front of the moab mountains PikiWiki Israel.jpg"
+ },
+ "clear-8.webp": {
+  "h": "sea_ridge",
+  "i": "weak",
+  "author": "שלמה רודד",
+  "license": "CC BY 2.5",
+  "source": "https://commons.wikimedia.org/wiki/File:127192_ein_bokek_-_sunrise_in_front_of_the_moab_mountains_PikiWiki_Israel.jpg",
+  "title": "File:127192 ein bokek - sunrise in front of the moab mountains PikiWiki Israel.jpg"
+ },
+ "clear-9.webp": {
+  "h": "sea_ridge",
+  "i": "weak",
+  "author": "רדיומן",
+  "license": "CC0",
+  "source": "https://commons.wikimedia.org/wiki/File:Moab_Mountains_sunrise.jpg",
+  "title": "File:Moab Mountains sunrise.jpg"
+ },
+ "mid_spectacular-3.webp": {
+  "h": "land",
+  "i": "strong",
+  "author": "גליה דוידסון",
+  "license": "CC BY 2.5",
+  "source": "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_11222_Sunset_in_the_mountains_of_Safed.JPG",
+  "title": "File:PikiWiki Israel 11222 Sunset in the mountains of Safed.JPG"
+ },
+ "mid_spectacular-4.webp": {
+  "h": "land",
+  "i": "strong",
+  "author": "גליה דוידסון",
+  "license": "CC BY 2.5",
+  "source": "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_11223_Sunset_in_the_mountains_of_Safed.JPG",
+  "title": "File:PikiWiki Israel 11223 Sunset in the mountains of Safed.JPG"
+ },
+ "thin_high-7.webp": {
+  "h": "land",
+  "i": "mid",
+  "author": "SuperJew",
+  "license": "CC BY-SA 3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Sunrise_Jerusalem_Hills_01.jpg",
+  "title": "File:Sunrise Jerusalem Hills 01.jpg"
+ },
+ "thin_high-8.webp": {
+  "h": "land",
+  "i": "weak",
+  "author": "SuperJew",
+  "license": "CC BY-SA 3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Sunrise_Jerusalem_Hills_02.jpg",
+  "title": "File:Sunrise Jerusalem Hills 02.jpg"
+ },
+ "haze-3.webp": {
+  "h": "land",
+  "i": "weak",
+  "author": "SuperJew",
+  "license": "CC BY-SA 3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Sunrise_Jerusalem_Hills_03.jpg",
+  "title": "File:Sunrise Jerusalem Hills 03.jpg"
+ },
+ "clear-10.webp": {
+  "h": "land",
+  "i": "mid",
+  "author": "זאב שטיין",
+  "license": "CC BY 2.5",
+  "source": "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_85100_sunrise_in_the_judean_desert.jpg",
+  "title": "File:PikiWiki Israel 85100 sunrise in the judean desert.jpg"
+ },
+ "thin_high-9.webp": {
+  "h": "land",
+  "i": "strong",
+  "author": "galit hadari",
+  "license": "CC BY 2.5",
+  "source": "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_38658_Sunset_hills_of_Galilee.JPG",
+  "title": "File:PikiWiki Israel 38658 Sunset hills of Galilee.JPG"
+ },
+ "clear-11.webp": {
+  "h": "land",
+  "i": "weak",
+  "author": "Eduard Marmet",
+  "license": "CC BY-SA 2.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Sunrise_in_Mitzpe_Ramon_(34513909605).jpg",
+  "title": "File:Sunrise in Mitzpe Ramon (34513909605).jpg"
+ },
+ "clear-12.webp": {
+  "h": "land",
+  "i": "weak",
+  "author": "Roshi08",
+  "license": "Public domain",
+  "source": "https://commons.wikimedia.org/wiki/File:ISRAEL_TRIP_282.jpg",
+  "title": "File:ISRAEL TRIP 282.jpg"
  }
 }
