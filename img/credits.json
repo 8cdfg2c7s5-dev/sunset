@@ -381,5 +381,26 @@
    "h": 100,
    "t": -30
   }
+ },
+ "mid_spectacular-6.webp": {
+  "author": "Alexkom000",
+  "license": "CC BY 4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:2025-12-14_Sunset_at_Praia_Formosa,_Santa_Cruz,_Torres_Vedras_6.jpg",
+  "title": "File:2025-12-14 Sunset at Praia Formosa, Santa Cruz, Torres Vedras 6.jpg",
+  "h": "sea",
+  "i": "strong",
+  "p": 0,
+  "fit": {
+   "x": 68
+  }
+ },
+ "haze-4.webp": {
+  "author": "Tuderna",
+  "license": "CC BY 3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Hazy_sunset_over_Baltic_sea_-_panoramio.jpg",
+  "title": "File:Hazy sunset over Baltic sea - panoramio.jpg",
+  "h": "sea",
+  "i": "weak",
+  "p": 0
  }
 }
