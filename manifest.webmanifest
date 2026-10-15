@@ -1,0 +1,19 @@
+{
+  "name": "תחזית שקיעה וזריחה",
+  "short_name": "שקיעות",
+  "description": "דירוג השקיעה והזריחה של היום מ-1 עד 10 לפי תחזית העננים במיקום שלך",
+  "lang": "he",
+  "dir": "rtl",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#F2A65A",
+  "background_color": "#5B6B7F",
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

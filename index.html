@@ -1,47 +1,108 @@
-<!doctype html><html lang="he" dir="rtl"><head><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌅</text></svg>"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@200;400;600;700&display=swap" rel="stylesheet"><title>תחזית שקיעה</title><style>html{scrollbar-gutter:stable}
-body{margin:0;font-family:-apple-system,'SF Hebrew','Heebo',sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;color:#fff;text-shadow:0 1px 3px #0006;min-height:100vh;display:flex;flex-direction:column;align-items:center;transition:background 1s;background:linear-gradient(#5B6B7F,#9AA5B1)}
-.tabs{display:flex;gap:8px;margin:24px}.tabs button{font-size:18px;padding:8px 16px;border-radius:20px;border:0;background:#fff3;color:#fff}.tabs .on{background:#fff;color:#333;text-shadow:none}
-.score{font-size:96px;font-weight:800;margin:8px 0 0}.msg{font-size:24px;text-align:center}.time{opacity:.9;margin:8px;font-variant-numeric:tabular-nums}
-ul{list-style:none;padding:0;font-size:18px}li{margin:8px}#loc{margin:24px;font-size:18px;padding:8px 24px;border-radius:20px;border:0}
-.score small{font-size:36px;opacity:.8}#day{font-size:18px;opacity:.9;min-height:22px}
-body.loading{background:linear-gradient(270deg,#5B6B7F,#F2A65A,#B05BA8,#5B6B7F)!important;background-size:600% 600%!important;animation:sh 6s ease infinite}
-@keyframes sh{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-#rate{margin:8px;text-align:center}#rb{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;justify-content:center;margin:8px}#rate #rb button{font-size:18px;width:100%;height:48px;margin:0;margin:4px;border-radius:50%;border:0}
-.tabs{background:#ffffff26;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:4px;border-radius:12px;gap:0}
-.tabs button{border-radius:9px!important;padding:8px 24px!important;font-weight:600;font-size:14px!important;background:transparent!important}
-.tabs .on{background:#fff!important;color:#1d1d1f!important;box-shadow:0 2px 8px #0002}
-.score{font-weight:200!important;font-size:120px!important;letter-spacing:-.04em;line-height:1}
-.msg{font-weight:600;font-size:26px!important;letter-spacing:-.02em}
-ul,#rate{background:#ffffff26;backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid #ffffff33;border-radius:20px;padding:16px 24px!important;width:min(340px,86vw);box-sizing:border-box}
-li{display:flex;justify-content:space-between;border-bottom:1px solid #ffffff22;padding:8px 0;margin:0!important;font-size:16px}li:last-child{border:0}
-#rate #rb button{background:#ffffffe6;color:#1d1d1f;font-weight:600;border-radius:14px!important}
-#loc{background:#fff!important;color:#1d1d1f;font-weight:600;border-radius:999px!important;box-shadow:0 4px 14px #0003}
-.time,li,#day{font-weight:400;opacity:.8}
-@media (prefers-reduced-motion:reduce){body.loading{animation:none}body{transition:none}}
-.score{border-radius:50%;padding:16px 24px;border:3px solid transparent}
-.score.c-high{border:4px solid #fff;padding:8px;box-shadow:0 0 8px #0003}.score.c-mid{border:4px dashed #fff;padding:8px;box-shadow:0 0 8px #0003}.score.c-low{border:4px dotted #fff;padding:8px;box-shadow:0 0 8px #0003}
-#conf:empty{display:none}
-#bgx{position:fixed;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(#ff5e62,#ff9966 45%,#6a3093);opacity:0;transition:opacity .6s ease}
-#clouds{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+<!doctype html><html lang="he" dir="rtl"><head><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌅</text></svg>"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#F2A65A"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="שקיעות"><meta name="description" content="דירוג השקיעה והזריחה של היום מ-1 עד 10 לפי תחזית העננים במיקום שלך">
+<title>תחזית שקיעה</title><style>
+:root{--bg1:#3a1f2b;--bg2:#1c1420;--accent:#F2A65A;--sub:rgba(255,255,255,.78)}
+*{box-sizing:border-box}html{scrollbar-gutter:stable}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'SF Hebrew','Segoe UI',Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;color:#fff;min-height:100vh;background:linear-gradient(var(--bg1),var(--bg2) 900px) var(--bg2);font-weight:400}
+p{margin:0}button{font-family:inherit}
+.wrap{max-width:560px;margin:0 auto;position:relative}
+.hero{position:relative;height:75vh;min-height:560px;max-height:820px;overflow:hidden;background:var(--bg1)}
+.hero img,.hero canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s ease}
+.hero img.out,.hero canvas.out{opacity:0}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(58,31,43,0) 30%,rgba(28,15,22,.62) 58%,rgba(32,17,26,.85) 82%,var(--bg1) 100%)}
+.top{position:absolute;top:16px;right:16px;left:16px;z-index:3;display:flex;justify-content:space-between;align-items:flex-start}
+.pill{background:rgba(0,0,0,.35);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:8px 16px;font-size:14px;font-weight:600;min-height:40px;display:flex;align-items:center;gap:8px;color:#fff;cursor:pointer}
+.hc{position:absolute;bottom:56px;right:24px;left:24px;z-index:2;transition:opacity .3s ease,transform .3s ease}
+.hc.out{opacity:0;transform:translateY(8px)}
+.label{font-size:14px;font-weight:600;color:var(--sub);margin-bottom:8px;min-height:20px}
+.score{direction:ltr;text-align:right;font-size:96px;font-weight:700;line-height:1;letter-spacing:-2px;font-variant-numeric:tabular-nums;margin:0}
+.score small{font-size:32px;font-weight:400;opacity:.78;letter-spacing:0}
+.sent{font-size:17px;font-weight:600;line-height:1.4;margin-top:16px;min-height:48px}
+.time{font-size:14px;color:var(--sub);margin-top:8px;font-variant-numeric:tabular-nums}
+#conf{font-size:12px;font-weight:600;color:var(--sub);margin-top:8px;cursor:pointer}#conf:empty{display:none}
+.credit{position:absolute;bottom:8px;left:8px;right:8px;z-index:2;font-size:12px;color:rgba(255,255,255,.7);line-height:1.4;text-align:left}
+.credit div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.credit a{color:inherit}
+#rng{position:relative;width:min(220px,60%);height:4px;margin:16px 0 40px auto;border-radius:4px;background:#ffffff33}#rng:empty{display:none}
+#rng i{position:absolute;top:0;bottom:0;border-radius:4px;background:#fffc;transform-origin:right;transform:scaleX(0);transition:transform .8s cubic-bezier(0,0,.58,1)}
+#rng b{position:absolute;top:-4px;width:12px;height:12px;margin-right:-6px;border-radius:50%;background:#fff;box-shadow:0 0 6px #0005;opacity:0;transition:opacity .4s .8s}
+#rng em{position:absolute;top:8px;font-size:12px;font-style:normal;opacity:.6;line-height:1}
+#rng.go i{transform:scaleX(1)}#rng.go b{opacity:1}
+section{padding:24px 16px 0;position:relative;z-index:1}
+h2{font-size:14px;font-weight:600;color:var(--sub);margin:0 0 8px}
+.wk-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.seg{display:flex;background:rgba(255,255,255,.12);border-radius:8px;padding:4px}
+.seg button{all:unset;font-size:12px;font-weight:600;padding:8px 16px;border-radius:8px;color:var(--sub);cursor:pointer;transition:background .3s,color .3s}
+.seg button[aria-pressed=true]{background:rgba(255,255,255,.9);color:#2a1620}
+.strip{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 8px;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.card{all:unset;box-sizing:border-box;flex:0 0 64px;height:96px;scroll-snap-align:start;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;position:relative;cursor:pointer;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}
+.card.sel{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.6)}
+.card .d{font-size:12px;color:var(--sub)}
+.card .s{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.dot{width:8px;height:8px;border-radius:50%}
+.low .dot{opacity:.5}.low .s{opacity:.6}
+.star{position:absolute;top:4px;left:8px;font-size:12px;color:var(--accent)}
+#tip{position:fixed;left:50%;bottom:24px;transform:translate(-50%,8px);background:rgba(0,0,0,.75);padding:8px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:9;white-space:nowrap}
+#tip.on{opacity:1;transform:translate(-50%,0)}
+.tl{position:relative;height:72px;margin:8px 32px 0}
+.tl .line{position:absolute;top:16px;right:0;left:0;height:2px;background:linear-gradient(to left,#F2A65A,#E0607E,#4A5BA8);border-radius:2px}
+.tl.rise .line{background:linear-gradient(to left,#4A5BA8,#E0607E,#F2A65A)}
+.mk{position:absolute;top:8px;transform:translateX(50%);text-align:center;font-size:12px;white-space:nowrap}
+.mk i{display:block;width:16px;height:16px;border-radius:50%;margin:0 auto 8px;border:2px solid #fff}
+.mk b{display:block;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.mk span{color:var(--sub)}
+.why{background:rgba(255,255,255,.08);border-radius:16px;padding:16px;font-size:14px;line-height:1.5}
+.why>p{font-size:17px;font-weight:600;line-height:1.4}
+details{margin-top:8px}summary{font-size:14px;font-weight:600;color:var(--accent);cursor:pointer;min-height:44px;display:flex;align-items:center}
+#why{list-style:none;padding:0;margin:0;font-size:14px;color:var(--sub)}#why li{display:flex;justify-content:space-between;border-bottom:1px solid #ffffff22;padding:8px 0}#why li:last-child{border:0}
+#rate{display:none;margin:24px 16px 0;background:rgba(255,255,255,.08);border-radius:16px;padding:16px;text-align:center}
+#rq{font-size:17px;font-weight:600}#rb{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 0 8px}
+#rb button{font-size:17px;height:48px;border-radius:16px;border:0;background:#ffffffe6;color:#1d1d1f;font-weight:600}
+#rmsg{font-size:14px;min-height:20px}#rate .exp{margin-top:8px;border-radius:8px;border:0;padding:4px 8px;font-size:12px}
+footer{padding:32px 16px 40px;font-size:12px;color:var(--sub);text-align:center}
+#tcf:not(:empty)::before,#age:not(:empty)::before{content:" · "}.hc.old{opacity:.5}
+#note{position:fixed;left:50%;bottom:24px;transform:translate(-50%,8px);background:rgba(0,0,0,.75);padding:8px 16px;border-radius:16px;font-size:14px;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:9;max-width:calc(100% - 32px);text-align:center}#note.on{opacity:1;transform:translate(-50%,0)}
+#pick{display:none;position:absolute;top:64px;right:16px;left:16px;z-index:4;flex-direction:column;align-items:stretch;gap:8px;background:rgba(20,12,18,.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:16px;padding:16px}
+#cityf{display:flex;gap:8px}#cityq{flex:1;font-size:16px;padding:8px 16px;border-radius:999px;border:0;min-width:0}
+#cityf button,#loc{font-size:16px;padding:8px 16px;border-radius:999px;border:0;font-weight:600;background:#fff;color:#1d1d1f}
+#res{max-height:min(240px,40vh);overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:8px}
+#upd{position:fixed;top:8px;left:8px;z-index:5;font-size:12px;padding:4px 8px;border-radius:999px;background:#0006;opacity:0;transition:opacity .3s;pointer-events:none}#upd.on{opacity:.85}
+#bgx{position:fixed;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(transparent 40%,#b0456066,#6a309355);opacity:0;transition:opacity .6s ease}
+#clouds{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .cl{position:absolute;left:-50%;width:200%;opacity:0;transition:opacity .6s ease;will-change:transform;animation:drift linear infinite}
 .cl.h{top:2%;height:28%;background:radial-gradient(ellipse 18% 30% at 20% 50%,#fff8,transparent 70%),radial-gradient(ellipse 22% 25% at 60% 40%,#fff6,transparent 70%),radial-gradient(ellipse 15% 20% at 85% 60%,#fff6,transparent 70%);animation-duration:90s}
 .cl.m{top:30%;height:30%;background:radial-gradient(ellipse 14% 35% at 10% 50%,#fff7,transparent 70%),radial-gradient(ellipse 20% 40% at 45% 55%,#fff6,transparent 70%),radial-gradient(ellipse 16% 30% at 78% 45%,#fff7,transparent 70%);animation-duration:75s;animation-direction:reverse}
 .cl.l{bottom:-4%;height:34%;background:radial-gradient(ellipse 20% 45% at 15% 60%,#dde3eb99,transparent 70%),radial-gradient(ellipse 25% 50% at 55% 65%,#cfd6df99,transparent 70%),radial-gradient(ellipse 18% 40% at 88% 55%,#dde3eb99,transparent 70%);animation-duration:60s}
 @keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(25%,0,0)}}
-#rng{position:relative;width:min(220px,60vw);height:4px;margin:8px auto 24px;border-radius:4px;background:#ffffff33}#rng:empty{display:none}
-#rng i{position:absolute;top:0;bottom:0;border-radius:4px;background:#fffc;transform-origin:right;transform:scaleX(0);transition:transform .8s cubic-bezier(0,0,.58,1)}
-#rng b{position:absolute;top:-4px;width:12px;height:12px;margin-right:-6px;border-radius:50%;background:#fff;box-shadow:0 0 6px #0005;opacity:0;transition:opacity .4s .8s}
-#rng em{position:absolute;top:8px;font-size:12px;font-style:normal;opacity:.6;line-height:1}
-#rng.go i{transform:scaleX(1)}#rng.go b{opacity:1}
 @keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .fx{animation:fu .6s cubic-bezier(.2,.8,.2,1) both}
-.tabs button{transition:background .3s,color .3s,box-shadow .3s}
-@media (prefers-reduced-motion:reduce){.cl{animation:none}.fx{animation:none}#bgx,.cl,#rng i,#rng b{transition:none}body{transition:none}}
-</style></head><body class="loading"><div id="bgx"></div><div id="clouds"><div class="cl h"></div><div class="cl m"></div><div class="cl l"></div></div>
-<div class="tabs"><button id="t-rise" onclick="show('rise')">זריחה</button><button id="t-set" onclick="show('set')">שקיעה</button></div>
-<div id="day"></div><div class="score" id="score"></div><div id="rng" aria-hidden="true"></div><div id="conf" onclick="flip()" style="font-size:14px;font-weight:600;margin-top:8px;padding:4px 16px;border-radius:999px;background:#00000040;display:inline-block"></div><figure id="sky" style="margin:16px 0 4px;display:none"><div id="pw" style="position:relative;width:min(340px,86vw);margin:auto;display:none"><img id="skyi" decoding="async" alt="" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:18px;display:block;box-shadow:0 6px 20px #0003"><div style="position:absolute;inset:0;border-radius:18px;background:linear-gradient(transparent 50%,#0008);pointer-events:none"></div><span id="pcap" style="position:absolute;bottom:22px;right:10px;left:10px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;font-weight:600;text-shadow:0 1px 3px #000"></span><div id="pcred" dir="ltr" style="text-align:right;position:absolute;bottom:6px;right:10px;left:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;opacity:.7;text-shadow:0 1px 3px #000"></div></div><canvas id="skyc" width="600" height="300" style="display:none;width:min(320px,82vw);border-radius:18px;box-shadow:0 6px 20px #0003"></canvas><figcaption id="skycap" style="display:none;text-align:center;font-size:12px;opacity:.75;margin-top:4px">איור משוער, לא צילום</figcaption></figure><div class="msg" id="msg">מאתר מיקום…</div><div class="time" id="time"></div><button id="place" onclick="togglePick()" style="margin-top:8px;font-size:14px;padding:8px 16px;border-radius:999px;border:1px solid #ffffff44;background:#ffffff26;color:#fff;backdrop-filter:blur(20px)"></button><div id="note" style="font-size:14px;opacity:.8;margin:4px 0 16px"></div><div id="pick" style="display:none;flex-direction:column;align-items:center"><form id="cityf" onsubmit="city(event)" style="display:flex;gap:8px;margin-top:16px"><input id="cityq" oninput="typed()" onfocus="setTimeout(vis,300)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="חיפוש עיר" style="font-size:16px;padding:8px 16px;border-radius:999px;border:0;width:170px"><button style="font-size:16px;padding:8px 16px;border-radius:999px;border:0;font-weight:600">חפש</button></form><div id="res" style="max-height:min(240px,40vh);overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:8px;margin-top:8px;width:min(300px,80vw)"></div><button id="loc" onclick="togglePick();locate()">📍 השתמש במיקום שלי</button></div>
-<div style="font-size:18px;font-weight:700;margin-top:8px">למה?</div><ul id="why"></ul><div id="rate" style="display:none"><div id="rq" style="font-size:18px;font-weight:700"></div><div id="rb"></div><div id="rmsg"></div><button onclick="exportLog()" style="margin-top:8px;border-radius:12px;border:0;padding:4px 8px">ייצוא דיווחים</button></div>
+body.loading .hc{opacity:.6}
+@media (min-width:900px){.wrap{max-width:720px}.hero{border-radius:0 0 24px 24px}}
+@media (prefers-reduced-motion:reduce){.cl{animation:none}.fx{animation:none}#bgx,.cl,#rng i,#rng b,.hc,.hero img,.hero canvas,#tip{transition:none}}
+</style></head><body class="loading"><div id="upd" role="status" aria-live="polite"></div><div id="bgx"></div><div id="clouds"><div class="cl h"></div><div class="cl m"></div><div class="cl l"></div></div><div id="tip" role="status"></div><div id="note" role="status" aria-live="polite"></div>
+<div class="wrap">
+<header class="hero" id="sky">
+ <img id="skyi" decoding="async" alt=""><canvas id="skyc" width="600" height="900" style="display:none"></canvas>
+ <div class="top"><button class="pill" id="place" onclick="togglePick()">📍</button></div>
+ <div id="pick"><form id="cityf" onsubmit="city(event)"><input id="cityq" oninput="typed()" onfocus="setTimeout(vis,300)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="חיפוש עיר"><button>חפש</button></form><div id="res"></div><button id="loc" onclick="togglePick();locate()">📍 השתמש במיקום שלי</button></div>
+ <div class="hc" id="hc">
+  <div class="label" id="day"></div>
+  <div class="score" id="score" dir="ltr"></div>
+  <div id="rng" aria-hidden="true"></div>
+  <p class="sent" id="msg">מאתר מיקום…</p>
+  <p class="time" id="time"><span id="tt"></span><span id="tcf"></span><span id="age"></span></p>
+  <div id="conf" onclick="flip()"></div>
+ </div>
+ <div class="credit"><div id="pcred" dir="ltr"></div><div id="pcap"></div><div id="skycap" style="display:none">איור משוער, לא צילום</div></div>
+</header>
+<section aria-label="השבוע">
+ <div class="wk-head"><h2 style="margin:0">השבוע</h2><div class="seg" role="group" aria-label="סוג"><button id="t-set" aria-pressed="false" onclick="show('set')">שקיעות</button><button id="t-rise" aria-pressed="false" onclick="show('rise')">זריחות</button></div></div>
+ <div class="strip" id="strip"></div>
+</section>
+<section aria-label="ציר זמן"><h2 id="tlh">השעה הקרובה</h2><div class="tl" id="tl"></div></section>
+<section aria-label="למה"><h2>למה?</h2><div class="why"><ul id="why"></ul></div></section>
+<div id="rate"><div id="rq"></div><div id="rb"></div><div id="rmsg"></div><button class="exp" onclick="exportLog()">ייצוא דיווחים</button></div>
+<footer>תחזית: Open-Meteo (ECMWF) · תמונות: Wikimedia Commons</footer>
+</div>
 <script>
 const $=id=>document.getElementById(id);let D=null,cur=new Date().getHours()>=12?'set':'rise';
 const F='https://api.open-meteo.com/v1/forecast',A='https://air-quality-api.open-meteo.com/v1/air-quality';
@@ -50,9 +111,9 @@ const mark=s=>s=='g'?'🟢 טוב':s=='m'?'🟡 בינוני':'🔴 חלש';
 function at(H,key,t){if(!H||!H.time||!H[key])return null;const i=H.time.findIndex(x=>+x>t);if(i<0)return H[key][H[key].length-1];if(i<1)return H[key][0];return 0.6*H[key][i-1]+0.4*H[key][i]}
 function calc(p,H,t){const high=at(H,'cloud_cover_high',t)+0.6*at(H,'cloud_cover_mid',t),canvas=Math.max(0,1-Math.abs(high-50)/50);
 const block=(p.far?at(p.far.hourly,'cloud_cover_low',t)??0:0)/100,humid=at(H,'relative_humidity_2m',t)>85?0.7:1;
-const aod=(D.aq&&at(D.aq.hourly,'aerosol_optical_depth',t))??0.2,haze=aod<=0.3?1:aod<=0.6?0.85:0.6;
+const aod=aodAt(t),noAod=aod==null,haze=noAod||aod<=0.3?1:aod<=0.6?0.85:0.6;
 const s=Math.round(1+9*canvas*(1-0.8*block)*humid*haze);
-return{s,canvas,block,humid,haze,aod,high,mid:at(H,'cloud_cover_mid',t),low:at(H,'cloud_cover_low',t)}}
+return{s,canvas,block,humid,haze,aod,noAod,high,mid:at(H,'cloud_cover_mid',t),low:at(H,'cloud_cover_low',t)}}
 
 const CR={"clear-1.webp": {"a": "Tuwuh", "h": "sea", "i": "strong", "l": "CC BY-SA 4.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:The_Perfect_Sunset.jpg"}, "clear-10.webp": {"a": "זאב שטיין", "h": "land", "i": "mid", "l": "CC BY 2.5", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_85100_sunrise_in_the_judean_desert.jpg"}, "clear-11.webp": {"a": "Eduard Marmet", "h": "land", "i": "weak", "l": "CC BY-SA 2.0", "p": 1, "u": "https://commons.wikimedia.org/wiki/File:Sunrise_in_Mitzpe_Ramon_(34513909605).jpg"}, "clear-12.webp": {"a": "Roshi08", "h": "land", "i": "weak", "l": "Public domain", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:ISRAEL_TRIP_282.jpg"}, "clear-13.webp": {"a": "Carmen Rohana2008", "h": "sea", "i": "weak", "l": "CC BY-SA 4.0", "p": 1, "u": "https://commons.wikimedia.org/wiki/File:Sunset_at_Haifa%27s_beautiful_beach.jpg"}, "clear-14.webp": {"a": "מקף־עברי", "h": "sea", "i": "weak", "l": "CC BY-SA 4.0", "p": 1, "u": "https://commons.wikimedia.org/wiki/File:Ashdod_Yam_Fortress_at_sunset,_23_September_2025_15.jpg"}, "clear-15.webp": {"a": "Ben Sale from UK", "h": "land", "i": "mid", "l": "CC BY 2.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Las_Descargues_-_Along_the_Ridge_(28031748191).jpg"}, "clear-16.webp": {"a": "NPS", "h": "land", "i": "weak", "l": "Public domain", "p": 1, "u": "https://commons.wikimedia.org/wiki/File:A_hazy_sunrise_behind_frosty,_wooded_hills_(5ee6bc4d-cfc0-45cb-86f1-f06ec68a8290).JPG"}, "clear-2.webp": {"a": "Revital Salomon", "h": "sea", "i": "weak", "l": "CC BY-SA 4.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Sunset_on_the_Sea_-_Tel_Aviv,_Israel.JPG"}, "clear-3.webp": {"a": "Namikilisu", "h": "sea", "i": "strong", "l": "CC0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Tel_Aviv-Yafo._Mediterranean_Sea.jpg"}, "clear-4.webp": {"a": "Borya", "h": "sea", "i": "weak", "l": "CC BY-SA 2.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Tel_Aviv_sunset_(5286231503).jpg"}, "clear-5.webp": {"a": "Dr. Avishai Teicher", "h": "sea", "i": "mid", "l": "CC BY 2.5", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_21894_Sunset_at_Tel_Aviv_beach.JPG"}, "clear-6.webp": {"a": "Alexander.Schaefer", "h": "land", "i": "mid", "l": "CC BY-SA 3.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Sunrise_in_Timna_2010.jpg"}, "clear-7.webp": {"a": "Eduard Marmet", "h": "land", "i": "weak", "l": "CC BY-SA 2.0", "p": 1, "u": "https://commons.wikimedia.org/wiki/File:Sunrise_over_the_Ramon_Crater,_Negev_desert_(33671459324).jpg"}, "clear-8.webp": {"a": "שלמה רודד", "h": "sea_ridge", "i": "weak", "l": "CC BY 2.5", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:127192_ein_bokek_-_sunrise_in_front_of_the_moab_mountains_PikiWiki_Israel.jpg"}, "clear-9.webp": {"a": "רדיומן", "h": "sea_ridge", "i": "weak", "l": "CC0", "p": 1, "u": "https://commons.wikimedia.org/wiki/File:Moab_Mountains_sunrise.jpg"}, "haze-1.webp": {"a": "MeRyan", "h": "land", "i": "strong", "l": "CC BY 2.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Hazy_Sunset_-_Canada.jpg"}, "haze-2.webp": {"a": "John Robert McPherson", "h": "land", "i": "strong", "l": "CC BY-SA 4.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Dust_haze_and_sunset,_Marchant_Park_Aspley_DSCF0066.jpg"}, "haze-3.webp": {"a": "SuperJew", "h": "land", "i": "weak", "l": "CC BY-SA 3.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Sunrise_Jerusalem_Hills_03.jpg"}, "horizon_band-1.webp": {"a": "Chad Sparkes from Kissimmee,Florida, United States", "h": "sea", "i": "mid", "l": "CC BY 2.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Rays_of_Sunset_(23591438603).jpg"}, "horizon_band-2.webp": {"a": "PattayaPatrol", "h": "sea", "i": "strong", "l": "CC BY-SA 4.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:DFC_1560_A_lone_boat_drifts_on_a_shimmering_sea_as_a_dramatic_golden_sunset_lights_up_towering_storm_clouds_on_the_horizon.jpg"}, "horizon_band-3.webp": {"a": "Peter Trimming", "h": "land", "i": "mid", "l": "CC BY-SA 2.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Stonehenge_Sunset_(4)_-_geograph.org.uk_-_1626243.jpg"}, "horizon_band-4.webp": {"a": "Dietmar Rabich", "h": "sea", "i": "weak", "l": "CC BY-SA 4.0", "p": 1, "u": "https://commons.wikimedia.org/wiki/File:Norderney,_Weststrand_--_2016_--_5285.jpg"}, "horizon_band-5.webp": {"a": "Joshua Tree National Park", "h": "land", "i": "weak", "l": "PD", "p": 1, "u": "https://commons.wikimedia.org/wiki/File:Smoke_from_Apple_Fire_at_sunset_at_Eureka_Peak_(51183274846).jpg"}, "mid_spectacular-1.webp": {"a": "Charles Knowles from Meridian Idaho, USA", "h": "land", "i": "strong", "l": "CC BY 2.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Colorful_and_dramatic_sunset_over_the_Boise_train_depot_-_Flickr_-_Knowles_Gallery.jpg"}, "mid_spectacular-2.webp": {"a": "Abubakr Saeed from Muscat, Oman, Sudan", "h": "sea", "i": "mid", "l": "CC BY 4.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Dramatic_Sky_-_Flickr_-_Abubakr_Saeed.jpg"}, "mid_spectacular-3.webp": {"a": "גליה דוידסון", "h": "land", "i": "strong", "l": "CC BY 2.5", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_11222_Sunset_in_the_mountains_of_Safed.JPG"}, "mid_spectacular-4.webp": {"a": "גליה דוידסון", "h": "land", "i": "strong", "l": "CC BY 2.5", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_11223_Sunset_in_the_mountains_of_Safed.JPG"}, "overcast-1.webp": {"a": "PattayaPatrol", "h": "sea", "i": "weak", "l": "CC BY-SA 4.0", "p": 1, "u": "https://commons.wikimedia.org/wiki/File:DSC_6669_A_quiet_overcast_shoreline_at_dusk_with_gentle_waves_lapping_the_sand_under_a_dramatic_cloud-filled_sky.jpg"}, "overcast-2.webp": {"a": "ndecker", "h": "land", "i": "weak", "l": "CC BY 3.0", "p": 1, "u": "https://commons.wikimedia.org/wiki/File:Cloudy_Sunset_over_Catskills_-_panoramio.jpg"}, "thin_high-1.webp": {"a": "GerritR", "h": "land", "i": "mid", "l": "CC BY-SA 4.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Schattenstrahlen_an_Cirrus_III.jpg"}, "thin_high-10.webp": {"a": "AlexMilkis", "h": "sea", "i": "weak", "l": "Public domain", "p": 1, "u": "https://commons.wikimedia.org/wiki/File:Ashdod_Beach.jpg"}, "thin_high-11.webp": {"a": "David Sedlmayer", "h": "land", "i": "weak", "l": "CC BY 2.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Foggy_Valley_Sunrise_(3002513982).jpg"}, "thin_high-2.webp": {"a": "McKay Savage from London, UK", "h": "land", "i": "mid", "l": "CC BY 2.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Pink-tinged_sunset_(6443858869).jpg"}, "thin_high-3.webp": {"a": "Sandralu80", "h": "sea", "i": "weak", "l": "CC BY-SA 4.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Sunset_on_Palics_lake.jpg"}, "thin_high-4.webp": {"a": "John Robert McPherson", "h": "land", "i": "weak", "l": "CC BY-SA 4.0", "p": 1, "u": "https://commons.wikimedia.org/wiki/File:Cirrus_at_sunset_7th_Brigade_Park_Chermside_P1010369.jpg"}, "thin_high-5.webp": {"a": "שלמה רודד", "h": "sea_ridge", "i": "weak", "l": "CC BY 2.5", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:127180_ein_bokek_-_sunrise_in_front_of_the_moab_mountains_PikiWiki_Israel.jpg"}, "thin_high-6.webp": {"a": "שלמה רודד", "h": "sea_ridge", "i": "mid", "l": "CC BY 2.5", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:127184_ein_bokek_-_sunrise_in_front_of_the_moab_mountains_PikiWiki_Israel.jpg"}, "thin_high-7.webp": {"a": "SuperJew", "h": "land", "i": "mid", "l": "CC BY-SA 3.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Sunrise_Jerusalem_Hills_01.jpg"}, "thin_high-8.webp": {"a": "SuperJew", "h": "land", "i": "weak", "l": "CC BY-SA 3.0", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:Sunrise_Jerusalem_Hills_02.jpg"}, "thin_high-9.webp": {"a": "galit hadari", "h": "land", "i": "strong", "l": "CC BY 2.5", "p": 0, "u": "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_38658_Sunset_hills_of_Galilee.JPG"}};
 let PC=null;function cat(r){return r.haze<=0.6?'haze':r.block>=0.6?'horizon_band':(r.low+r.mid+r.high)<20||(r.high<10&&(r.low+r.mid)<50)?'clear':(r.low+r.mid)>=85?'overcast':(r.low+r.mid)>=50?(r.s<4?'horizon_band':'mid_spectacular'):r.mid>=25?'mid_spectacular':'thin_high'}
@@ -61,13 +122,13 @@ function photo(c,good,isSet,s){const d=new Date(),EASTSEA=(LL[0]<29.8)||(LL[1]>3
 const K=Object.keys(CR).sort(),inC=x=>K.filter(k=>k.startsWith(x+'-')),H=k=>CR[k].h,hz=isSet?(k=>H(k)==(SEA?'sea':'land')):(k=>H(k)=='land'||(EASTSEA&&H(k)=='sea_ridge')),okH=isSet?(k=>H(k)!='sea_ridge'):hz,okI=k=>!(sc<=3&&CR[k].i=='strong'),
 NEAR={clear:['haze','thin_high','horizon_band','overcast'],overcast:['horizon_band','clear','thin_high'],horizon_band:['overcast','clear','thin_high'],thin_high:['clear','mid_spectacular','horizon_band'],mid_spectacular:['thin_high','horizon_band'],haze:['clear','horizon_band','thin_high']},
 cats=[c].concat(NEAR[c]||[]).filter(x=>!(x=='overcast'&&sc>=4)),ADJ={weak:['weak','mid'],mid:['mid','weak','strong'],strong:['strong','mid']};let L=[];
-for(const f of [hz,okH]){for(const ii of ADJ[wi]){for(const n of cats){L=inC(n).filter(k=>f(k)&&CR[k].i==ii&&okI(k));if(L.length)break}if(L.length)break}if(L.length)break}
+for(const f of [hz,okH]){for(const n of cats){for(const ii of ADJ[wi]){L=inC(n).filter(k=>f(k)&&CR[k].i==ii&&okI(k));if(L.length)break}if(L.length)break}if(L.length)break}
 if(!L.length)L=K.filter(k=>okH(k)&&okI(k));
 if(sc<=2){const P=L.filter(k=>CR[k].p);if(P.length)L=P}
-const doy=Math.floor((d-new Date(d.getFullYear(),0,0))/864e5),hh=Math.round(LL[1]*10)+3*Math.round(LL[0]*10)+doy+(good?1:0);
+const doy=Math.floor((d-new Date(d.getFullYear(),0,0))/864e5),hh=Math.round(LL[1]*10)+3*Math.round(LL[0]*10)+doy+(good?1:0)+SELD*7;
 const cnt=L.length||1,f=L[(((hh+(isSet?1:0))%cnt)+cnt)%cnt]||(c+'-1.webp'),i=$('skyi'),w=Object.assign({a:'Wikimedia Commons',l:'',u:'https://commons.wikimedia.org'},CR[f]||{});
-i.onload=()=>{$('pw').style.display='block';$('skyc').style.display='none';$('skycap').style.display='none'};i.onerror=()=>{$('pw').style.display='none';$('skyc').style.display='';$('skycap').style.display='';$('pcred').textContent=''};
-console.log('photo',isSet?'set':'rise','s='+sc,c,wi,f,CR[f]&&CR[f].h,CR[f]&&CR[f].i,good?'good':'median',JSON.stringify(good?GOOD:(window.EMED||null)));i.src='img/'+f;$('pcap').textContent=good?'כך זה ייראה אם יתמזל':'כך נראית '+(isSet?'שקיעה':'זריחה')+' בתנאים דומים';
+i.onload=()=>{i.style.display='';i.classList.remove('out');$('skyc').style.display='none';$('skycap').style.display='none';$('pcap').style.display=''};i.onerror=()=>{i.style.display='none';$('skyc').style.display='';$('skycap').style.display='';$('pcap').style.display='none';$('pcred').textContent=''};
+PCAT=String(f).split('-')[0];console.log('photo',isSet?'set':'rise','s='+sc,c,wi,f,CR[f]&&CR[f].h,CR[f]&&CR[f].i,good?'good':'median',JSON.stringify(good?GOOD:(window.EMED||null)));i.src='img/'+f;$('pcap').textContent=good?'כך זה ייראה אם יתמזל':'כך נראית '+(isSet?'שקיעה':'זריחה')+' בתנאים דומים';
 $('pcred').innerHTML=w?'📷 <a style="color:inherit" target="_blank" rel="noopener" href="'+w.u+'">'+String(w.a||'Wikimedia Commons').replace(/</g,'').replace(/^User:\s*/i,'').split(/ from |,|\(/)[0].trim().slice(0,24)+' · '+w.l+'</a>':''}
 let LL=[32.08,34.78],SEA=true,GOOD=null,BASE=null,ALT=0;function flip(){if(!GOOD)return;ALT^=1;if(ALT){sky(GOOD.s,GOOD.cv,GOOD.bl,GOOD.haze,GOOD.set);try{photo(gcat(GOOD),1,GOOD.set,GOOD.s)}catch(e){console.error(e)}}else{sky(...BASE);$('skycap').textContent='איור משוער, לא צילום';try{photo(PC,0,BASE[4],BASE[0])}catch(e){console.error(e)}}}
 function sky(score,canvas,block,haze,isSet){const c=$('skyc'),x=c.getContext('2d'),W=c.width,Hh=c.height,sat=(score-1)/9;
@@ -86,17 +147,57 @@ function ens(p,t,humid,haze){if(!p.en||!p.ef||!p.en.hourly||!p.ef.hourly)return 
 for(let m=0;m<=50;m++){const x=m?'_member'+String(m).padStart(2,'0'):'';const H=p.en.hourly,F=p.ef.hourly;
 if(H['cloud_cover_high'+x]==null||F['cloud_cover_low'+x]==null)continue;
 const hi=at(H,'cloud_cover_high'+x,t)+0.6*at(H,'cloud_cover_mid'+x,t),cv=Math.max(0,1-Math.abs(hi-50)/50),bl=at(F,'cloud_cover_low'+x,t)/100;
-if([hi,bl].some(v=>v==null||isNaN(v)))continue;sc.push(Math.round(1+9*cv*(1-0.8*bl)*humid*haze));cm.push({s:sc[sc.length-1],cv,bl,mid:at(H,'cloud_cover_mid'+x,t),low:H['cloud_cover_low'+x]?at(H,'cloud_cover_low'+x,t):0,hi})}
+if([hi,bl].some(v=>v==null||isNaN(v)))continue;sc.push(Math.round(1+9*cv*(1-0.8*bl)*humid*haze));cm.push({s:sc[sc.length-1],cv,bl,h:at(H,'cloud_cover_high'+x,t),mid:at(H,'cloud_cover_mid'+x,t),low:H['cloud_cover_low'+x]?at(H,'cloud_cover_low'+x,t):0,hi})}
 sc.splice(0,sc.length,...sc.filter(Number.isFinite));if(sc.length<10)return null;sc.sort((a,b)=>a-b);const q=f=>sc[Math.floor(f*(sc.length-1))];const spread=q(.9)-q(.1);
 return{s:Math.round(q(.5)),med:(()=>{const g=q(.5);return cm.find(o=>o.s==g)})(),good:(()=>{const g=q(.9);return cm.find(o=>o.s==g)})(),ch:Math.round(100*sc.filter(v=>v>=7).length/sc.length),lo:q(.1),hi:q(.9),conf:spread<=2?'high':spread<=4?'mid':'low'}}
-function show(k){cur=k;$('t-rise').className=k=='rise'?'on':'';$('t-set').className=k=='set'?'on':'';if(!D)return;for(const[id,kk,nm]of[['t-rise','rise','זריחה'],['t-set','set','שקיעה']]){const e=D[kk]&&D[kk].f.daily[kk=='set'?'sunset':'sunrise'];if(e)$(id).textContent=nm+' · '+(e[0]*1000<Date.now()?'מחר':'היום')}
-const p=D[k],ev=p.f.daily[k=='set'?'sunset':'sunrise'],day=ev[0]*1000<Date.now()?1:0,t=ev[day],H=p.f.hourly;$('day').textContent=day?'מחר':'היום';
-const R0=calc(p,H,t);let {s,canvas,block,humid,haze,aod}=R0;PC=cat(R0);const EN=ens(p,t,humid,haze);if(EN)s=EN.s;window.EMED=EN&&EN.med;if(EN&&EN.med){canvas=EN.med.cv;block=EN.med.bl;if(PC!='haze')PC=gcat(EN.med)}ALT=0;try{sky(s,canvas,block,haze,k=='set')}catch(e){}
-const L=s<=3?['כנראה שקיעה אפורה','#5B6B7F,#9AA5B1']:s<=6?['יכולה להיות נחמדה','#F2A65A,#7A8FB0']:s<=8?['שווה לצאת!','#FF7E5F,#B05BA8']:['שקיעה מרהיבה צפויה!','#FF5E62,#FF9966,#6A3093'];
-document.body.classList.remove('loading');$('score').innerHTML=s+'<small>/10</small>';try{fx(s,EN,R0)}catch(e){console.error('fx failed',e)}$('score').classList.remove('c-high','c-mid','c-low');$('score').className='score'+(EN?' c-'+EN.conf:'');$('conf').textContent=EN?{high:'ודאות גבוהה',mid:'ודאות בינונית',low:'ודאות נמוכה'}[EN.conf]+(EN.ch>=10&&EN.s<7?' · סיכוי של '+EN.ch+'% למחזה מרהיב ▸':''):'';GOOD=EN&&EN.ch>=10&&EN.s<7&&EN.good?{...EN.good,haze,set:k=='set'}:null;BASE=[s,canvas,block,haze,k=='set'];$('skycap').textContent='איור משוער, לא צילום';try{photo(PC,0,k=='set',s)}catch(e){console.error('photo failed',e)}if(day){const t0=ev[0],r=calc(p,H,t0);LAST={date:new Date(t0*1000).toISOString(),type:k,predicted:r.s,canvas:+r.canvas.toFixed(3),block:+r.block.toFixed(3),humid:r.humid,haze:r.haze,aod:r.aod};}else LAST=null;
-$('rate').style.display=day?'block':'none';$('rq').textContent=k=='set'?'איך הייתה השקיעה היום?':'איך הייתה הזריחה היום?';$('msg').textContent=k=='rise'?L[0].replace('שקיעה','זריחה'):L[0];document.body.style.background=`linear-gradient(${L[1]})`;
-const m=Math.round((t*1000-Date.now())/6e4);$('time').textContent=`${k=='set'?'שקיעה':'זריחה'} ב-${new Date((t+(D.off||0))*1000).toISOString().slice(11,16)}`+(m>0?` · בעוד ${Math.floor(m/60)}:${String(m%60).padStart(2,'0')}`:'');
-$('why').innerHTML=[['☁️ עננים גבוהים שיתפסו צבע',canvas>0.6?'g':canvas>=0.3?'m':'b'],[`🌅 אופק פתוח ב${k=='set'?'מערב':'מזרח'}`,block<0.2?'g':block<=0.5?'m':'b'],['💧 לחות',humid==1?'g':'b'],['🌫️ אוויר צלול',haze==1?'g':haze==0.85?'m':'b']].map(([a,b])=>`<li>${a}: ${mark(b)}</li>`).join('')}
+function aodAt(t){const A=D&&D.aq&&D.aq.hourly;if(!A||!A.time||!A.aerosol_optical_depth||!A.time.length)return null;if(t<+A.time[0]||t>+A.time[A.time.length-1]+3600)return null;const v=at(A,'aerosol_optical_depth',t);return v==null||isNaN(v)?null:v}
+function evs(k){const ev=D[k].f.daily[k=='set'?'sunset':'sunrise']||[],st=ev[0]*1000<Date.now()?1:0;return ev.slice(st,st+7).filter(x=>x!=null)}
+function dayData(k,i){D._m=D._m||{};const key=k+i;if(D._m[key])return D._m[key];const p=D[k],t=evs(k)[i];if(t==null)return null;const H=p.f.hourly;
+const R0=calc(p,H,t),EN=ens(p,t,R0.humid,R0.haze);let s=R0.s,conf=null;if(EN){s=EN.s;conf=EN.conf;if(R0.noAod&&conf=='high')conf='mid';EN.conf=conf}
+return D._m[key]={t,s,conf,EN,R0}}
+const WD=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+function dname(t){const o=D.off||0,dd=Math.floor((t+o)/86400),td=Math.floor((Date.now()/1000+o)/86400);return dd==td?'היום':dd==td+1?'מחר':WD[new Date((t+o)*1000).getUTCDay()]}
+const hhmm=t=>new Date((Math.round(t/60)*60+(D.off||0))*1000).toISOString().slice(11,16);
+const dcol=s=>s<=3?'#9AA5B1':s<=4?'#C9A27A':s<=5?'#D9905A':s<=6?'#E8884F':s<=7?'#F2A65A':'#E0607E';
+function elev(ms,lat,lon){const r=Math.PI/180,d=ms/864e5+2440587.5-2451545,g=(357.529+0.98560028*d)*r,q=280.459+0.98564736*d,L=(q+1.915*Math.sin(g)+0.020*Math.sin(2*g))*r,e=(23.439-0.00000036*d)*r,RA=Math.atan2(Math.cos(e)*Math.sin(L),Math.cos(L))/r,dec=Math.asin(Math.sin(e)*Math.sin(L)),gm=(18.697374558+24.06570982441908*d)*15,H=(gm+lon-RA)*r;return Math.asin(Math.sin(lat*r)*Math.sin(dec)+Math.cos(lat*r)*Math.cos(dec)*Math.cos(H))/r}
+function when(a,b,target){let fa=elev(a*1000,LL[0],LL[1])-target,fb=elev(b*1000,LL[0],LL[1])-target;if(fa*fb>0)return null;for(let n=0;n<30;n++){const m=(a+b)/2,fm=elev(m*1000,LL[0],LL[1])-target;if(fa*fm<=0){b=m;fb=fm}else{a=m;fa=fm}}return (a+b)/2}
+function timeline(k,t){const set=k=='set',M=set?[[when(t-3*3600,t,6),'שעת הזהב','#F2A65A'],[t,'שקיעה','#E0607E'],[when(t,t+2*3600,-4),'שעה כחולה','#4A5BA8']]:[[when(t-2*3600,t,-6),'שעה כחולה','#4A5BA8'],[t,'זריחה','#E0607E'],[when(t,t+3*3600,6),'סוף שעת הזהב','#F2A65A']];
+const ok=M.filter(m=>m[0]!=null),a=Math.min(...ok.map(m=>m[0])),b=Math.max(...ok.map(m=>m[0]));$('tl').className='tl'+(set?'':' rise');
+$('tl').innerHTML='<div class="line"></div>'+ok.map(m=>`<div class="mk" style="right:${b>a?(8+84*(m[0]-a)/(b-a)).toFixed(1):50}%"><i style="background:${m[2]}"></i><b>${hhmm(m[0])}</b><span>${m[1]}</span></div>`).join('')}
+function sentence(k,dd){const H=D[k].f.hourly,t=dd.t,R=dd.R0,M=dd.EN&&dd.EN.med,he=M?M.hi:R.high,bl=M?M.bl:R.block,lo=(M?M.low:R.low)||0,mi=(M?M.mid:R.mid)||0,hr=(M&&M.h!=null?M.h:at(H,'cloud_cover_high',t))||0,rh=at(H,'relative_humidity_2m',t),aod=R.aod;
+const dir=k=='set'?'במערב':'במזרח',open_=bl<0.3,c=PCAT||PC;let main,mi_=0;
+if(c=='clear'){main=dd.s<=3?'שמיים נקיים: '+(k=='set'?'שקיעה':'זריחה')+' צלולה, בלי הרבה צבע בעננים':'עננים גבוהים ודקים יכולים לקלוט קצת צבע'}
+else if(c=='thin_high'){main='עננים גבוהים ודקים יכולים לקלוט צבע'+(open_?', והאופק '+dir+' פתוח':'')}
+else if(c=='mid_spectacular'){main=open_?'עננים גבוהים יקלטו צבע, והאופק '+dir+' פתוח':'עננים בגובה בינוני יכולים להידלק בצבע'}
+else if(c=='overcast'){main='שמיים מעוננים ונמוכים יסתירו את רוב הצבע';mi_=2}
+else if(c=='horizon_band'){main='פס עננים נמוך באופק '+dir+' עלול לחסום את השמש';mi_=2}
+else if(c=='haze'){main='אובך יעמעם את הצבעים';mi_=6}
+else main='מעט עננים לקלוט צבע';
+let lim='';if(bl>=0.5&&mi_!=2)lim='אבל עננים נמוכים באופק עלולים לחסום את השמש';else if(aod!=null&&aod>0.6&&mi_!=6)lim='אבל אובך כבד יעמעם את הצבעים';else if(rh!=null&&rh>85)lim='אבל לחות גבוהה תרכך את הצבעים';
+return main+(lim?', '+lim:'')+(dd.conf=='low'?' (התחזית עדיין לא יציבה)':'')}
+let SELD=0,TIPT=0,LP=0,PCAT=null;
+function tip(m){const e=$('tip');e.textContent=m;e.classList.add('on');clearTimeout(TIPT);TIPT=setTimeout(()=>e.classList.remove('on'),1800)}
+function strip(k){const n=evs(k).length,DS=[...Array(n)].map((_,i)=>dayData(k,i)).filter(Boolean);let star=-1,bs=5;DS.forEach((d,i)=>{if((d.conf=='high'||d.conf=='mid')&&d.s>=6&&d.s>bs){bs=d.s;star=i}});
+$('strip').innerHTML=DS.map((d,i)=>`<button class="card${i==SELD?' sel':''}${d.conf=='low'?' low':''}" data-i="${i}" aria-pressed="${i==SELD}" aria-label="${dname(d.t)}: ${d.s} מתוך 10${d.conf=='low'?', ודאות נמוכה':''}">${i==star?'<span class="star" aria-label="הכי טוב השבוע">★</span>':''}<span class="d">${dname(d.t)}</span><span class="s">${d.s}</span><span class="dot" style="background:${dcol(d.s)}"></span></button>`).join('');
+$('strip').querySelectorAll('.card').forEach(c=>{let tm=0;const i=+c.dataset.i;c.onpointerdown=()=>{LP=0;clearTimeout(tm);if(c.classList.contains('low'))tm=setTimeout(()=>{LP=1;tip('תחזית רחוקה, ודאות נמוכה')},500)};c.onpointerup=c.onpointerleave=c.onpointercancel=()=>clearTimeout(tm);c.oncontextmenu=e=>{if(c.classList.contains('low'))e.preventDefault()};c.onclick=()=>{if(LP){LP=0;return}pickDay(i)}})}
+let SWT=0;function swap(fn){const hc=$('hc'),im=$('skyi'),my=++SWT;if(RM.matches||!D){fn();return}hc.classList.add('out');im.classList.add('out');$('skyc').classList.add('out');setTimeout(()=>{if(my!=SWT)return;fn();hc.classList.remove('out');$('skyc').classList.remove('out')},300)}
+function pickDay(i){if(i==SELD)return;SELD=i;swap(()=>show(cur,1))}
+function dirOK(){return $('msg').textContent.includes(cur=='set'?'במזרח':'במערב')?0:1}
+function show(k,noSwap){if(k!=cur&&!noSwap&&D){cur=k;swap(()=>show(k,1));return}cur=k;$('t-rise').setAttribute('aria-pressed',k=='rise');$('t-set').setAttribute('aria-pressed',k=='set');if(!D)return;
+const n=evs(k).length;if(SELD>=n)SELD=0;const dd=dayData(k,SELD);if(!dd)return;const p=D[k],t=dd.t,H=p.f.hourly,R0=dd.R0,EN=dd.EN;let {canvas,block,humid,haze}=R0,s=dd.s;
+const nm=k=='set'?'השקיעה':'הזריחה',dn=dname(t);$('day').textContent=nm+' '+(dn=='היום'||dn=='מחר'?dn:'ביום '+dn);
+PC=cat(R0);window.EMED=EN&&EN.med;if(EN&&EN.med){canvas=EN.med.cv;block=EN.med.bl;if(PC!='haze')PC=gcat(EN.med)}ALT=0;try{sky(s,canvas,block,haze,k=='set')}catch(e){}
+document.body.classList.remove('loading');$('score').innerHTML=s+'<small>/10</small>';try{fx(s,EN,R0)}catch(e){console.error('fx failed',e)}
+$('tcf').textContent=EN?{high:'ודאות גבוהה',mid:'ודאות בינונית',low:'ודאות נמוכה'}[dd.conf]:'';$('conf').textContent=EN&&EN.ch>=10&&EN.s<7?'סיכוי של '+EN.ch+'% למחזה מרהיב ▸':'';GOOD=EN&&EN.ch>=10&&EN.s<7&&EN.good?{...EN.good,haze,set:k=='set'}:null;BASE=[s,canvas,block,haze,k=='set'];
+try{photo(PC,0,k=='set',s)}catch(e){console.error('photo failed',e)}
+const all=p.f.daily[k=='set'?'sunset':'sunrise'],past=all[0]*1000<Date.now();if(past){const t0=all[0],r=calc(p,H,t0);LAST={date:new Date(t0*1000).toISOString(),type:k,predicted:r.s,canvas:+r.canvas.toFixed(3),block:+r.block.toFixed(3),humid:r.humid,haze:r.haze,aod:r.aod};}else LAST=null;
+$('rate').style.display=past?'block':'none';$('rq').textContent=k=='set'?'איך הייתה השקיעה היום?':'איך הייתה הזריחה היום?';
+const sen=sentence(k,dd);$('msg').textContent=sen;
+const m=Math.round((t*1000-Date.now())/6e4);$('tt').textContent=`${k=='set'?'שקיעה':'זריחה'} ב-${hhmm(t)}`+(m>0&&m<24*60?` · בעוד ${Math.floor(m/60)}:${String(m%60).padStart(2,'0')}`:'');
+$('tlh').textContent=SELD==0&&m>0&&m<120?'השעה הקרובה':'סביב ה'+(k=='set'?'שקיעה':'זריחה');try{timeline(k,t)}catch(e){console.error('timeline failed',e)}
+$('why').innerHTML=[['☁️ עננים גבוהים שיתפסו צבע',canvas>0.6?'g':canvas>=0.3?'m':'b'],[`🌅 אופק פתוח ב${k=='set'?'מערב':'מזרח'}`,block<0.2?'g':block<=0.5?'m':'b'],['💧 לחות',humid==1?'g':'b'],['🌫️ אוויר צלול',R0.noAod?null:haze==1?'g':haze==0.85?'m':'b']].map(([a,b])=>`<li><span>${a}</span><span>${b?mark(b):'אין נתון'}</span></li>`).join('')+(EN?`<li><span>📊 טווח התחזית</span><span>${EN.lo}–${EN.hi}</span></li><li><span>🎯 ודאות</span><span>${{high:'גבוהה',mid:'בינונית',low:'נמוכה'}[dd.conf]}</span></li>`:'');
+strip(k)}
+
 let LAST=null;
 $('rb').innerHTML=[...Array(10)].map((_,i)=>`<button onclick="rate(${i+1})">${i+1}</button>`).join('');
 function rate(n){if(!LAST)return;const log=JSON.parse(localStorage.sunsetLog||'[]');log.push({...LAST,observed:n,reported:new Date().toISOString()});localStorage.sunsetLog=JSON.stringify(log);$('rmsg').textContent=`נשמר: ${n}/10, תודה!`}
@@ -104,14 +205,14 @@ function exportLog(){const b=new Blob([localStorage.sunsetLog||'[]'],{type:'appl
 let PLACE='',SEQ=0,MANUAL=0;
 function sunAz(lat,isSet,ms){const d=new Date(ms),n=(d-Date.UTC(d.getUTCFullYear(),0,1))/864e5,dec=23.44*Math.sin(2*Math.PI*(284+n)/365)*Math.PI/180,c=Math.sin(dec)/Math.cos(lat*Math.PI/180),A=Math.acos(Math.max(-1,Math.min(1,c)))*180/Math.PI;return isSet?360-A:A}
 function sunward(lat,lon,az,km){const r=az*Math.PI/180;return [+(lat+km*Math.cos(r)/111).toFixed(4),+(lon+km*Math.sin(r)/(111*Math.cos(lat*Math.PI/180))).toFixed(4)]}
-async function load(lat,lon,name){const my=++SEQ;LL=[lat,lon];SEA=lat>31.2&&lat<33.1&&lon<34.75+0.25*(lat-31.2);PLACE=name||'';if(PLACE)$('place').textContent='📍 '+PLACE+' ▾';$('time').textContent='…';
-const T='&timezone=auto&timeformat=unixtime&forecast_days=2',q=`&hourly=cloud_cover_low,cloud_cover_mid,cloud_cover_high,relative_humidity_2m&daily=sunrise,sunset${T}`,ms=Date.now()+12*36e5;
+async function load(lat,lon,name){const my=++SEQ;LL=[lat,lon];SEA=lat>31.2&&lat<33.1&&lon<34.75+0.25*(lat-31.2);PLACE=name||'';cShow(cGet(lat,lon),1);if(PLACE)$('place').textContent='📍 '+PLACE+' ▾';if(!CSHOWN)$('tt').textContent='…';
+const T='&timezone=auto&timeformat=unixtime&forecast_days=8',TA='&timezone=auto&timeformat=unixtime&forecast_days=5',q=`&hourly=cloud_cover_low,cloud_cover_mid,cloud_cover_high,relative_humidity_2m&daily=sunrise,sunset${T}`,ms=Date.now()+12*36e5;
 const azS=sunAz(lat,1,ms),azR=sunAz(lat,0,ms),pS=sunward(lat,lon,azS,75),pR=sunward(lat,lon,azR,75);console.log('sunward',PLACE||'gps',lat,lon,'set az',azS.toFixed(1),pS.join(','),'rise az',azR.toFixed(1),pR.join(','));
 const E='https://ensemble-api.open-meteo.com/v1/ensemble',eq='&models=ecmwf_ifs025'+T,ok=p=>p.catch(e=>{console.warn('optional request failed',e&&e.message);return null}),pt=p=>`latitude=${p[0]}&longitude=${p[1]}`;
-let f,w,e,aq,en,enw,ene;try{[f,w,e,aq,en,enw,ene]=await Promise.all([j(`${F}?latitude=${lat}&longitude=${lon}${q}`),ok(j(`${F}?${pt(pS)}${q}`)),ok(j(`${F}?${pt(pR)}${q}`)),ok(j(`${A}?latitude=${lat}&longitude=${lon}&hourly=aerosol_optical_depth${T}`)),ok(j(`${E}?latitude=${lat}&longitude=${lon}&hourly=cloud_cover_low,cloud_cover_mid,cloud_cover_high${eq}`)),ok(j(`${E}?${pt(pS)}&hourly=cloud_cover_low${eq}`)),ok(j(`${E}?${pt(pR)}&hourly=cloud_cover_low${eq}`))])}catch(err){if(my!=SEQ)return;document.body.classList.remove('loading');$('time').textContent='';$('msg').textContent='לא הצלחנו לטעון תחזית, נסו שוב';return}
-if(my!=SEQ)return;if(!f||!f.daily||f.error){document.body.classList.remove('loading');$('time').textContent='';$('msg').textContent='לא הצלחנו לטעון תחזית, נסו שוב';return}
-const OFF=f.utc_offset_seconds||0;D={off:OFF,set:{f,far:w,en,ef:enw},rise:{f,far:e,en,ef:ene},aq};$('place').textContent='📍 '+(PLACE||'המיקום שלך')+' ▾';show(cur)}
-function locate(){MANUAL=0;$('msg').textContent='מאתר מיקום…';document.body.classList.add('loading');
+let f,w,e,aq,en,enw,ene;try{[f,w,e,aq,en,enw,ene]=await Promise.all([j(`${F}?latitude=${lat}&longitude=${lon}${q}`),ok(j(`${F}?${pt(pS)}${q}`)),ok(j(`${F}?${pt(pR)}${q}`)),ok(j(`${A}?latitude=${lat}&longitude=${lon}&hourly=aerosol_optical_depth${TA}`)),ok(j(`${E}?latitude=${lat}&longitude=${lon}&hourly=cloud_cover_low,cloud_cover_mid,cloud_cover_high${eq}`)),ok(j(`${E}?${pt(pS)}&hourly=cloud_cover_low${eq}`)),ok(j(`${E}?${pt(pR)}&hourly=cloud_cover_low${eq}`))])}catch(err){if(my!=SEQ)return;if(cFail())return;document.body.classList.remove('loading');$('tt').textContent='';$('msg').textContent='לא הצלחנו לטעון תחזית, נסו שוב';return}
+if(my!=SEQ)return;if(!f||!f.daily||f.error){if(cFail())return;document.body.classList.remove('loading');$('tt').textContent='';$('msg').textContent='לא הצלחנו לטעון תחזית, נסו שוב';return}
+const OFF=f.utc_offset_seconds||0;SELD=0;D={off:OFF,set:{f,far:w,en,ef:enw},rise:{f,far:e,en,ef:ene},aq};$('place').textContent='📍 '+(PLACE||'המיקום שלך')+' ▾';upd(0);show(cur);cSave(lat,lon,PLACE,[f,w,e,aq,en,enw,ene])}
+function locate(){MANUAL=0;if(!CSHOWN){$('msg').textContent='מאתר מיקום…';document.body.classList.add('loading')}
 const tlv=(why)=>{if(MANUAL)return;load(32.08,34.78,'תל אביב-יפו');$('note').textContent='לא הצלחנו לאתר אותך, מציגים את תל אביב-יפו'};
 if(!navigator.geolocation||!window.isSecureContext)return tlv('הדפדפן לא תומך במיקום');
 navigator.geolocation.getCurrentPosition(p=>{$('note').textContent='';if(MANUAL)return;const la=p.coords.latitude,lo=p.coords.longitude;load(la,lo,'');
@@ -131,7 +232,20 @@ const anyClose=RES.some(c=>close(c,q));$('res').innerHTML=!RES.length?msg('לא 
 function typed(){const q=$('cityq').value.trim();clearTimeout(STMR);$('note').textContent='';if(q.length<3){if(SCTL)SCTL.abort();SCTL=null;LASTQ='';$('res').style.opacity=q?.5:1;if(!q){RES=[];$('res').innerHTML=''}return}$('res').style.opacity=.5;STMR=setTimeout(()=>fetchSug(q).catch(()=>{}),300)}
 async function city(ev){ev.preventDefault();clearTimeout(STMR);const q=$('cityq').value.trim();if(!q)return;let R=LASTQ==q?RES:null;if(!R){try{R=await fetchSug(q)}catch(e){return}if(!R)return}if(R.length&&good(R[0],q))pickCity(R[0])}
 let RES=[],LASTQ='';function pickCity(c){MANUAL=1;$('res').innerHTML='';$('note').textContent='';togglePick(false);document.body.classList.add('loading');load(c.latitude,c.longitude,c.name)}
-show(cur);locate();
+let CSHOWN=0;const CK='fcache2',dayKey=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()},lk=(a,b)=>(+a).toFixed(2)+','+(+b).toFixed(2);
+function upd(on,stale){const e=$('upd');if(!e)return;if(!on){$('age').textContent='';$('hc').classList.remove('old')}e.textContent=on?(stale?'מעדכן נתונים ישנים…':'מעדכן…'):'';e.classList.toggle('on',!!on);document.body.classList.toggle('updating',!!on)}
+function cAll(){try{return JSON.parse(localStorage[CK]||'{}')}catch(e){return {}}}
+function cGet(lat,lon,any){const a=cAll(),k=lat==null?a.last:lk(lat,lon),c=k&&a[k];return c&&(any||c.day==dayKey())?c:null}
+function ago(t){const m=Math.max(0,Math.round((Date.now()-t)/6e4)),h=Math.round(m/60),d=Math.floor(m/1440);return 'עודכן '+(m<1?'עכשיו':m<60?'לפני '+(m==1?'דקה':m+' דקות'):m<1440?'לפני '+(h==1?'שעה':h==2?'שעתיים':h+' שעות'):'לפני '+(d==1?'יום':d==2?'יומיים':d+' ימים'))}
+function cSave(lat,lon,name,r){try{const a=cAll(),k=lk(lat,lon);a[k]={lat,lon,name,t:Date.now(),day:dayKey(),r};a.last=k;
+const ks=Object.keys(a).filter(x=>x!='last').sort((x,y)=>a[y].t-a[x].t);ks.slice(3).forEach(x=>delete a[x]);
+try{localStorage[CK]=JSON.stringify(a)}catch(e){localStorage[CK]=JSON.stringify({last:k,[k]:a[k]})}}catch(e){console.warn('cache save failed',e&&e.message)}}
+function cShow(c,inLoad){if(!c)return 0;try{const[f,w,e,aq,en,enw,ene]=c.r;if(!f||!f.daily)return 0;if(!inLoad){LL=[c.lat,c.lon];PLACE=c.name||'';SEA=c.lat>31.2&&c.lat<33.1&&c.lon<34.75+0.25*(c.lat-31.2)}
+D={off:f.utc_offset_seconds||0,set:{f,far:w,en,ef:enw},rise:{f,far:e,en,ef:ene},aq};document.body.classList.remove('loading');$('place').textContent='📍 '+(c.name||PLACE||'המיקום שלך')+' ▾';show(cur);CSHOWN=1;upd(1,Date.now()-c.t>6*36e5);$('age').textContent=ago(c.t);$('hc').classList.toggle('old',Date.now()-c.t>864e5);return 1}catch(err){console.warn('cache render failed',err&&err.message);return 0}}
+function cFail(){if(!CSHOWN||!D){const c=cGet(LL[0],LL[1],1)||cGet(null,null,1);if(!c||!cShow(c))return 0}const a=$('age').textContent,o=$('hc').classList.contains('old');upd(0);$('age').textContent=a;$('hc').classList.toggle('old',o);$('note').textContent='אין חיבור, מוצגת התחזית השמורה';return 1}
+let NT=0;new MutationObserver(()=>{const e=$('note');clearTimeout(NT);if(!e.textContent){e.classList.remove('on');return}e.classList.add('on');NT=setTimeout(()=>{e.classList.remove('on');setTimeout(()=>{if(!e.classList.contains('on'))e.textContent=''},300)},4000)}).observe($('note'),{childList:true,characterData:true,subtree:true});
+addEventListener('DOMContentLoaded',()=>{if(!cShow(cGet()))show(cur);locate()});
+if('serviceWorker' in navigator&&location.protocol!='file:')addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(e=>console.warn('sw',e&&e.message)));
 </script><script>
 let FXT=0;const EO=x=>{let a=0,b=1;for(let n=0;n<20;n++){const t=(a+b)/2,u=1-t,bx=3*u*t*t*.58+t*t*t;bx<x?a=t:b=t}const t=(a+b)/2,u=1-t;return 3*u*t*t+t*t*t};const RM=matchMedia('(prefers-reduced-motion: reduce)');
 function fx(s,EN,R){const el=document.getElementById('score'),my=++FXT,c=v=>Math.max(0,Math.min(100,+v||0));
@@ -139,10 +253,10 @@ document.getElementById('bgx').style.opacity=Math.max(0,(s-3)/7*0.75).toFixed(2)
 const M=EN&&EN.med,cl=document.querySelectorAll('.cl');(M?[M.hi,M.mid,M.low]:[R.high,R.mid,R.low]).forEach((v,i)=>cl[i].style.opacity=(c(v)<5?0:.15+.15*c(v)/100).toFixed(2));
 const rg=document.getElementById('rng');rg.classList.remove('go');
 if(EN&&EN.lo!=null){const lo=Math.max(1,EN.lo),hi=Math.min(10,Math.max(lo,EN.hi)),x=v=>(v-1)/9*100;rg.innerHTML=`<i style="right:${x(lo)}%;width:${Math.max(2,x(hi)-x(lo))}%"></i><b style="right:${x(s)}%"></b><em style="right:0">1</em><em style="left:0">10</em>`;rg.title=`טווח תחזית ${lo}–${hi}`;}else rg.innerHTML='';
-['score','msg','time','sky','conf'].forEach((id,i)=>{const e=document.getElementById(id);if(!e)return;e.classList.remove('fx');void e.offsetWidth;e.style.animationDelay=(i*.06)+'s';e.classList.add('fx')});
+['score','msg','time','conf'].forEach((id,i)=>{const e=document.getElementById(id);if(!e)return;e.classList.remove('fx');void e.offsetWidth;e.style.animationDelay=(i*.06)+'s';e.classList.add('fx')});
 const st=n=>{el.innerHTML=n+'<small>/10</small>'};
 if(RM.matches){rg.classList.add('go');return}st(1);const D=800;let t0=0;
 const start=()=>{if(my!=FXT)return;if(document.hidden){document.addEventListener('visibilitychange',start,{once:true});return}requestAnimationFrame(()=>requestAnimationFrame(now=>{if(my!=FXT)return;t0=now;rg.classList.add('go');tick(now)}))};start();
 function tick(now){if(my!=FXT)return;const k=Math.min(1,(now-t0)/D),e=EO(k);st(Math.max(1,Math.round(1+(s-1)*e)));if(k<1)requestAnimationFrame(tick);else st(s)}}
-document.addEventListener('DOMContentLoaded',()=>document.querySelectorAll('ul,#rate').forEach((e,i)=>{e.classList.add('fx');e.style.animationDelay=(i*.06)+'s'}));
+document.addEventListener('DOMContentLoaded',()=>document.querySelectorAll('section,#rate').forEach((e,i)=>{e.classList.add('fx');e.style.animationDelay=(i*.06)+'s'}));
 </script></body></html>
