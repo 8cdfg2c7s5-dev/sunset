@@ -21,7 +21,7 @@ p{margin:0}button{font-family:inherit}
 #conf{font-size:12px;font-weight:600;color:var(--sub);margin-top:8px;cursor:pointer}#conf:empty{display:none}
 .credit{position:absolute;bottom:8px;left:8px;right:8px;z-index:2;font-size:12px;color:rgba(255,255,255,.7);line-height:1.4;text-align:left}
 .credit div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.credit a{color:inherit}
-#rng{position:relative;width:min(220px,60%);height:4px;margin:16px 0 40px auto;border-radius:4px;background:#ffffff33}#rng:empty{display:none}
+#rng{position:relative;width:min(220px,60%);height:4px;margin:16px 0 32px auto;border-radius:4px;background:#ffffff33}#rng:empty{display:none}
 #rng i{position:absolute;top:0;bottom:0;border-radius:4px;background:#fffc;transform-origin:right;transform:scaleX(0);transition:transform .8s cubic-bezier(0,0,.58,1)}
 #rng b{position:absolute;top:-4px;width:12px;height:12px;margin-right:-6px;border-radius:50%;background:#fff;box-shadow:0 0 6px #0005;opacity:0;transition:opacity .4s .8s}
 #rng em{position:absolute;top:8px;font-size:12px;font-style:normal;opacity:.6;line-height:1}
@@ -59,7 +59,7 @@ details{margin-top:8px}summary{font-size:14px;font-weight:600;color:var(--accent
 #rb button{font-size:17px;height:48px;border-radius:16px;border:0;background:#ffffffe6;color:#1d1d1f;font-weight:600}
 #rmsg{font-size:14px;min-height:20px}#rate .exp{margin-top:8px;border-radius:8px;border:0;padding:4px 8px;font-size:12px}
 footer{padding:32px 16px 40px;font-size:12px;color:var(--sub);text-align:center}
-#tcf:not(:empty)::before,#age:not(:empty)::before{content:" · "}.hc.old{opacity:.5}
+.hc.old{opacity:.5}
 #note{position:fixed;left:50%;bottom:24px;transform:translate(-50%,8px);background:rgba(0,0,0,.75);padding:8px 16px;border-radius:16px;font-size:14px;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:9;max-width:calc(100% - 32px);text-align:center}#note.on{opacity:1;transform:translate(-50%,0)}
 #pick{display:none;position:absolute;top:64px;right:16px;left:16px;z-index:4;flex-direction:column;align-items:stretch;gap:8px;background:rgba(20,12,18,.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:16px;padding:16px}
 #cityf{display:flex;gap:8px}#cityq{flex:1;font-size:16px;padding:8px 16px;border-radius:999px;border:0;min-width:0}
@@ -188,7 +188,7 @@ const n=evs(k).length;if(SELD>=n)SELD=0;const dd=dayData(k,SELD);if(!dd)return;c
 const nm=k=='set'?'השקיעה':'הזריחה',dn=dname(t);$('day').textContent=nm+' '+(dn=='היום'||dn=='מחר'?dn:'ביום '+dn);
 PC=cat(R0);window.EMED=EN&&EN.med;if(EN&&EN.med){canvas=EN.med.cv;block=EN.med.bl;if(PC!='haze')PC=gcat(EN.med)}ALT=0;try{sky(s,canvas,block,haze,k=='set')}catch(e){}
 document.body.classList.remove('loading');$('score').innerHTML=s+'<small>/10</small>';try{fx(s,EN,R0)}catch(e){console.error('fx failed',e)}
-$('tcf').textContent=EN?{high:'ודאות גבוהה',mid:'ודאות בינונית',low:'ודאות נמוכה'}[dd.conf]:'';$('conf').textContent=EN&&EN.ch>=10&&EN.s<7?'סיכוי של '+EN.ch+'% למחזה מרהיב ▸':'';GOOD=EN&&EN.ch>=10&&EN.s<7&&EN.good?{...EN.good,haze,set:k=='set'}:null;BASE=[s,canvas,block,haze,k=='set'];
+$('tcf').textContent=EN?' · '+{high:'ודאות גבוהה',mid:'ודאות בינונית',low:'ודאות נמוכה'}[dd.conf]:'';$('conf').textContent=EN&&EN.ch>=10&&EN.s<7?'סיכוי של '+EN.ch+'% למחזה מרהיב ▸':'';GOOD=EN&&EN.ch>=10&&EN.s<7&&EN.good?{...EN.good,haze,set:k=='set'}:null;BASE=[s,canvas,block,haze,k=='set'];
 try{photo(PC,0,k=='set',s)}catch(e){console.error('photo failed',e)}
 const all=p.f.daily[k=='set'?'sunset':'sunrise'],past=all[0]*1000<Date.now();if(past){const t0=all[0],r=calc(p,H,t0);LAST={date:new Date(t0*1000).toISOString(),type:k,predicted:r.s,canvas:+r.canvas.toFixed(3),block:+r.block.toFixed(3),humid:r.humid,haze:r.haze,aod:r.aod};}else LAST=null;
 $('rate').style.display=past?'block':'none';$('rq').textContent=k=='set'?'איך הייתה השקיעה היום?':'איך הייתה הזריחה היום?';
@@ -219,7 +219,7 @@ navigator.geolocation.getCurrentPosition(p=>{$('note').textContent='';if(MANUAL)
 const setN=n=>{if(n&&!PLACE){PLACE=n;$('place').textContent='📍 '+n+' ▾'}};let c=null;try{c=JSON.parse(localStorage.geoName||'null')}catch(e){}
 if(c&&Date.now()-c.t<6e5&&Math.abs(c.la-la)<0.05&&Math.abs(c.lo-lo)<0.05)setN(c.n);
 else fetch(`https://nominatim.openstreetmap.org/reverse?lat=${la}&lon=${lo}&format=json&accept-language=he&zoom=10`).then(r=>r.json()).then(g=>{if(g&&g.name){localStorage.geoName=JSON.stringify({la,lo,n:g.name,t:Date.now()});setN(g.name)}}).catch(()=>{})},e=>tlv(e.code==1?'הרשאת המיקום נחסמה':'לא הצלחנו לאתר מיקום'),{timeout:10000,maximumAge:600000})}
-function togglePick(v){const e=$('pick');e.style.display=(v===undefined?e.style.display=='none':v)?'flex':'none'}
+function togglePick(v){const e=$('pick');e.style.display=(v===undefined?getComputedStyle(e).display!='flex':v)?'flex':'none'}
 const NZ=x=>String(x||'').normalize('NFD').replace(/[\u0300-\u036f\u0591-\u05c7]/g,'').toLowerCase().replace(/[\s\-־'"׳״.,]+/g,' ').trim();
 function good(c,q){const n=NZ(q);if(n.length<3)return false;return [c.name,c.en].some(x=>{const m=NZ(x);return m==n||(m.startsWith(n+' '))})}
 const close=(c,q)=>{const n=NZ(q);return n.length>=2&&[c.name,c.en].some(x=>NZ(x).includes(n))};let SCTL=null,STMR=0,NREQ=0;
@@ -241,7 +241,7 @@ function cSave(lat,lon,name,r){try{const a=cAll(),k=lk(lat,lon);a[k]={lat,lon,na
 const ks=Object.keys(a).filter(x=>x!='last').sort((x,y)=>a[y].t-a[x].t);ks.slice(3).forEach(x=>delete a[x]);
 try{localStorage[CK]=JSON.stringify(a)}catch(e){localStorage[CK]=JSON.stringify({last:k,[k]:a[k]})}}catch(e){console.warn('cache save failed',e&&e.message)}}
 function cShow(c,inLoad){if(!c)return 0;try{const[f,w,e,aq,en,enw,ene]=c.r;if(!f||!f.daily)return 0;if(!inLoad){LL=[c.lat,c.lon];PLACE=c.name||'';SEA=c.lat>31.2&&c.lat<33.1&&c.lon<34.75+0.25*(c.lat-31.2)}
-D={off:f.utc_offset_seconds||0,set:{f,far:w,en,ef:enw},rise:{f,far:e,en,ef:ene},aq};document.body.classList.remove('loading');$('place').textContent='📍 '+(c.name||PLACE||'המיקום שלך')+' ▾';show(cur);CSHOWN=1;upd(1,Date.now()-c.t>6*36e5);$('age').textContent=ago(c.t);$('hc').classList.toggle('old',Date.now()-c.t>864e5);return 1}catch(err){console.warn('cache render failed',err&&err.message);return 0}}
+D={off:f.utc_offset_seconds||0,set:{f,far:w,en,ef:enw},rise:{f,far:e,en,ef:ene},aq};document.body.classList.remove('loading');$('place').textContent='📍 '+(c.name||PLACE||'המיקום שלך')+' ▾';show(cur);CSHOWN=1;upd(1,Date.now()-c.t>6*36e5);$('age').textContent=' · '+ago(c.t);$('hc').classList.toggle('old',Date.now()-c.t>864e5);return 1}catch(err){console.warn('cache render failed',err&&err.message);return 0}}
 function cFail(){if(!CSHOWN||!D){const c=cGet(LL[0],LL[1],1)||cGet(null,null,1);if(!c||!cShow(c))return 0}const a=$('age').textContent,o=$('hc').classList.contains('old');upd(0);$('age').textContent=a;$('hc').classList.toggle('old',o);$('note').textContent='אין חיבור, מוצגת התחזית השמורה';return 1}
 let NT=0;new MutationObserver(()=>{const e=$('note');clearTimeout(NT);if(!e.textContent){e.classList.remove('on');return}e.classList.add('on');NT=setTimeout(()=>{e.classList.remove('on');setTimeout(()=>{if(!e.classList.contains('on'))e.textContent=''},300)},4000)}).observe($('note'),{childList:true,characterData:true,subtree:true});
 addEventListener('DOMContentLoaded',()=>{if(!cShow(cGet()))show(cur);locate()});
