@@ -95,7 +95,7 @@ let f,w,e,aq,en,enw,ene;try{[f,w,e,aq,en,enw,ene]=await Promise.all([j(`${F}?lat
 if(my!=SEQ)return;if(!f||!f.daily||f.error){document.body.classList.remove('loading');$('time').textContent='';$('msg').textContent='לא הצלחנו לטעון תחזית, נסו שוב';return}
 const OFF=f.utc_offset_seconds||0;D={off:OFF,set:{f,far:w,en,ef:enw},rise:{f,far:e,en,ef:ene},aq};$('place').textContent='📍 '+(PLACE||'המיקום שלך')+' ▾';show(cur)}
 function locate(){MANUAL=0;$('msg').textContent='מאתר מיקום…';document.body.classList.add('loading');
-const tlv=(why)=>{if(MANUAL)return;load(32.08,34.78,'תל אביב');$('note').textContent='לא הצלחנו לאתר אותך, מציגים את תל אביב'};
+const tlv=(why)=>{if(MANUAL)return;load(32.08,34.78,'תל אביב-יפו');$('note').textContent='לא הצלחנו לאתר אותך, מציגים את תל אביב-יפו'};
 if(!navigator.geolocation||!window.isSecureContext)return tlv('הדפדפן לא תומך במיקום');
 navigator.geolocation.getCurrentPosition(p=>{$('note').textContent='';if(MANUAL)return;const la=p.coords.latitude,lo=p.coords.longitude;load(la,lo,'');
 const setN=n=>{if(n&&!PLACE){PLACE=n;$('place').textContent='📍 '+n+' ▾'}};let c=null;try{c=JSON.parse(localStorage.geoName||'null')}catch(e){}
