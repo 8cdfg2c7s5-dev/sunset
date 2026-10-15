@@ -367,5 +367,19 @@
   "h": "land",
   "i": "weak",
   "p": 0
+ },
+ "mid_spectacular-5.webp": {
+  "author": "John Robert McPherson",
+  "license": "CC0",
+  "source": "https://commons.wikimedia.org/wiki/File:Altocumulus_at_sunrise_Heinrich_Gerns_Park_Wavell_Heights_P1050387.jpg",
+  "title": "File:Altocumulus at sunrise Heinrich Gerns Park Wavell Heights P1050387.jpg",
+  "h": "land",
+  "i": "mid",
+  "p": 0,
+  "fit": {
+   "x": 50,
+   "h": 100,
+   "t": -30
+  }
  }
 }
