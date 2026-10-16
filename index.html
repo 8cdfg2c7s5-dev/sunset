@@ -1,7 +1,7 @@
 <!doctype html><html lang="he" dir="rtl"><head><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌅</text></svg>"><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://api.open-meteo.com https://air-quality-api.open-meteo.com https://ensemble-api.open-meteo.com https://geocoding-api.open-meteo.com https://nominatim.openstreetmap.org; font-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#F2A65A"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="שקיעות"><meta name="description" content="דירוג השקיעה והזריחה של היום מ-1 עד 10 לפי תחזית העננים במיקום שלך">
 <title>תחזית שקיעה</title><style>
 :root{--bg1:#3a1f2b;--bg2:#1c1420;--accent:#F2A65A;--sub:rgba(255,255,255,.78)}
-*{box-sizing:border-box}html{scrollbar-gutter:stable}
+*{box-sizing:border-box}@media (hover:hover) and (pointer:fine){html{scrollbar-gutter:stable}}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'SF Hebrew','Segoe UI',Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;color:#fff;min-height:100vh;background:linear-gradient(var(--bg1),var(--bg2) 900px) var(--bg2);font-weight:400}
 p{margin:0}button{font-family:inherit}
 .wrap{max-width:560px;margin:0 auto;position:relative}
@@ -62,7 +62,7 @@ details{margin-top:8px}summary{font-size:14px;font-weight:600;color:var(--accent
 #rmsg{font-size:14px;min-height:20px}#rate .exp{margin-top:8px;border-radius:8px;border:0;padding:4px 8px;font-size:12px}
 footer{padding:32px 16px 40px;font-size:12px;color:var(--sub);text-align:center}
 .hc.old{opacity:.5}
-#note{position:fixed;left:50%;bottom:24px;transform:translate(-50%,8px);background:rgba(0,0,0,.75);padding:8px 16px;border-radius:16px;font-size:14px;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:9;max-width:calc(100% - 32px);text-align:center}#note.on{opacity:1;transform:translate(-50%,0)}
+#note{position:fixed;left:50%;bottom:calc(64px + env(safe-area-inset-bottom));transform:translate(-50%,8px);background:rgba(0,0,0,.75);padding:8px 16px;border-radius:16px;font-size:14px;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:9;max-width:calc(100% - 32px);text-align:center}#note.on{opacity:1;transform:translate(-50%,0)}
 #pick{display:none;position:absolute;top:64px;right:16px;left:16px;z-index:4;flex-direction:column;align-items:stretch;gap:8px;background:rgba(20,12,18,.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:16px;padding:16px}
 #cityf{display:flex;gap:8px}#cityq{flex:1;font-size:16px;padding:8px 16px;border-radius:999px;border:0;min-width:0}
 #cityf button,#loc{font-size:16px;padding:8px 16px;border-radius:999px;border:0;font-weight:600;background:#fff;color:#1d1d1f}
